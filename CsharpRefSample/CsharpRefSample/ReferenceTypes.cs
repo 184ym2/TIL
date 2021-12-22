@@ -11,25 +11,49 @@ namespace CsharpRefSample
     /// </summary>
     class ReferenceTypes
     {
+        /// <summary>
+        /// 参照渡しと ref
+        /// </summary>
         public void Call()
         {
+            // 値渡し
             var paramRef = new int[] { 1, 2, 3 };
             Console.WriteLine("呼出前　" + string.Join(", ", paramRef));
             ReferenceTypes_PassByValue(paramRef);
             Console.WriteLine("呼出後　" + string.Join(", ", paramRef));
 
+            // 参照渡し　ref
             var paramRef2 = new int[] { 1, 2, 3 };
             Console.WriteLine("呼出前　" + string.Join(", ", paramRef2));
             ReferenceTypes_PassByReference_ref(ref paramRef2);
             Console.WriteLine("呼出後　" + string.Join(", ", paramRef2));
 
-            Console.WriteLine("\r\n---参照型：Swapメソッド [ref]---\r\n");
+            // 値の入れ替え
+            Console.WriteLine("\r\n---Swapメソッド---\r\n");
             var hello = "Hello";
             var world = "World!";
             Console.WriteLine("呼出前　 {0} {1}", hello, world);
             SwapStrings(ref hello, ref world);
             Console.WriteLine("呼出後　 {0} {1}", hello, world);
-            Console.ReadKey();
+        }
+
+        /// <summary>
+        /// in と out
+        /// </summary>
+        public void Call2()
+        {
+            // 参照渡し　in
+            var paramRef = new int[] { 1, 2, 3 };
+            Console.WriteLine("呼出前　" + string.Join(", ", paramRef));
+            ReferenceTypes_PassByReference_in(paramRef);
+            ReferenceTypes_PassByReference_in(in paramRef);
+            Console.WriteLine("呼出後　" + string.Join(", ", paramRef));
+
+            // 参照渡し　out
+            var paramRef2 = new int[] { 1, 2, 3 };
+            Console.WriteLine("呼出前　" + string.Join(", ", paramRef2));
+            ReferenceTypes_PassByReference_out(out paramRef2);
+            Console.WriteLine("呼出後　" + string.Join(", ", paramRef2));
         }
 
         /// <summary>
