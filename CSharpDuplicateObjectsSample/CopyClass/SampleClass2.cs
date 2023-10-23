@@ -2,9 +2,18 @@ namespace CSharpDuplicateObjectsSample.CopyClass
 {
     public class SampleClass2
     {
+        // コンパイラ エラー CS1612 回避のため、SampleStructをフィールドにしています。
+        // https://learn.microsoft.com/ja-jp/dotnet/csharp/language-reference/compiler-messages/cs1612
         public SampleStruct SampleStruct;
 
         public SampleClass SampleClass;
+
+        // 初期化
+        public SampleClass2(SampleStruct sampleStruct, SampleClass sampleClass)
+        {
+            SampleStruct = sampleStruct;
+            SampleClass = sampleClass;
+        }
 
         // コピーコンストラクタ
         public SampleClass2(SampleClass2 sampleClass2)
@@ -14,18 +23,18 @@ namespace CSharpDuplicateObjectsSample.CopyClass
         }
 
         /// <summary>
-        /// シャローコピー用のMemberwiseCloneメソッド
+        /// シャローコピーを実行します。
         /// </summary>
-        /// <returns></returns>
+        /// <returns><see cref="SampleClass2" />が戻ります。</returns>
         public SampleClass2 SharrowCopy()
         {
             return (SampleClass2)MemberwiseClone();
         }
 
         /// <summary>
-        /// ディープコピー用のメソッド
+        /// ディープコピーを実行します。
         /// </summary>
-        /// <returns></returns>
+        /// <returns><see cref="SampleClass2" />が戻ります。</returns>
         public SampleClass2 DeepCopy()
         {
             var clone = SharrowCopy();

@@ -1,9 +1,5 @@
 namespace CSharpDuplicateObjectsSample.CopyClass
 {
-    /// <summary>
-    /// コピー元の構造体
-    /// クラスメンバはプリミティブ型
-    /// </summary>
     public struct SampleStruct
     {
         public int Id { get; set; }
@@ -14,6 +10,7 @@ namespace CSharpDuplicateObjectsSample.CopyClass
 
         public string[] Names { get; set; }
 
+        // 初期化
         public SampleStruct(int id, string name, int[] ids, string[] names)
         {
             Id = id;
@@ -32,18 +29,18 @@ namespace CSharpDuplicateObjectsSample.CopyClass
         }
 
         /// <summary>
-        /// シャローコピー用のMemberwiseCloneメソッド
+        /// シャローコピーを実行します。
         /// </summary>
-        /// <returns></returns>
+        /// <returns><see cref="SampleStruct" />が戻ります。</returns>
         public SampleStruct SharrowCopy()
         {
             return (SampleStruct)MemberwiseClone();
         }
 
         /// <summary>
-        /// ディープコピー用のメソッド
+        /// ディープコピーを実行します。
         /// </summary>
-        /// <returns></returns>
+        /// <returns><see cref="SampleStruct" />が戻ります。</returns>
         public SampleStruct DeepCopy()
         {
             var clone = SharrowCopy();

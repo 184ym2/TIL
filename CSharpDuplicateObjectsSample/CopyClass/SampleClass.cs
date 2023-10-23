@@ -1,9 +1,5 @@
 namespace CSharpDuplicateObjectsSample.CopyClass
 {
-    /// <summary>
-    /// コピー元のクラス
-    /// クラスメンバはプリミティブ型
-    /// </summary>
     public class SampleClass
     {
         public int Id { get; set; }
@@ -32,18 +28,18 @@ namespace CSharpDuplicateObjectsSample.CopyClass
         }
 
         /// <summary>
-        /// シャローコピー用のMemberwiseCloneメソッド
+        /// シャローコピーを実行します。
         /// </summary>
-        /// <returns></returns>
+        /// <returns><see cref="SampleClass" />が戻ります。</returns>
         public SampleClass SharrowCopy()
         {
             return (SampleClass)MemberwiseClone();
         }
 
         /// <summary>
-        /// ディープコピー用のメソッド
+        /// ディープコピーを実行します。
         /// </summary>
-        /// <returns></returns>
+        /// <returns><see cref="SampleClass" />が戻ります。</returns>
         public SampleClass DeepCopy()
         {
             var clone = SharrowCopy();
