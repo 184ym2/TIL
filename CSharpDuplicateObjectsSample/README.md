@@ -19,3 +19,9 @@ This is the sample code used in the Qiita C# Advent Calendar 2020 Day 16 article
 ### Executable Procedure
 VSCodeのターミナルで dotnet run を実行します。<br>
 Run dotnet run in the VSCode terminal.
+```
+xxx\til\CSharpDuplicateObjectsSample>dotnet run
+```
+
+
+
