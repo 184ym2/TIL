@@ -19,3 +19,6 @@ This is the sample code used in the Qiita C# Advent Calendar 2021 Day 25 article
 ### Executable Procedure
 VSCodeのターミナルで dotnet run を実行します。<br>
 Run dotnet run in the VSCode terminal.
+```
+xxx\til\CSharpRefSample>dotnet run
+```
