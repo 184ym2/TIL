@@ -11,7 +11,6 @@ Created on December 22, 2021
 Qiita C# Advent Calendar 2021 25日目 の記事で使用したサンプルコードです。<br>
 Sample code used in the article for the 25th day of the Qiita C# Advent Calendar 2021.
 
-
 ## Execution Environment
 * .NET 6.0<br>
 * Visual Studio Code 2019<br>
@@ -19,3 +18,7 @@ Sample code used in the article for the 25th day of the Qiita C# Advent Calendar
 ### Executable Procedure
 VSCodeのターミナルで dotnet run を実行します。<br>
 Execute `dotnet run` in the VSCode terminal.
+
+```
+xxx\til\CSharpRefSample>dotnet run
+```
