@@ -54,12 +54,10 @@ namespace CSharpRefSample
 
             value1 = value2;
             value2 = temp;
-
-            Console.WriteLine($"書き換え後 {value1} {value2}");
         }
 
         /// <summary>
-        /// 参照型を値渡しするメソッドと参照型を参照渡しするメソッドを呼び出します。
+        /// 参照型を「値渡し」するメソッドと参照型を「参照渡し」するメソッドを呼び出します。
         /// </summary>
         public void ReferenceTypesCall()
         {
@@ -76,7 +74,7 @@ namespace CSharpRefSample
             var paramRef2 = new int[] { 1, 2, 3 };
             Console.WriteLine($"呼び出し前 {string.Join(", ", paramRef2)}");
 
-            ReferenceTypes_PassByReference_ref(ref paramRef2);
+            ReferenceTypes_PassByReference_ref(ref paramRef2); // ref キーワードは必須
             Console.WriteLine($"呼び出し後 {string.Join(", ", paramRef2)}");
 
             // 参照型の参照渡し in
@@ -85,7 +83,6 @@ namespace CSharpRefSample
             Console.WriteLine($"呼び出し前 {string.Join(", ", paramRef3)}");
 
             ReferenceTypes_PassByReference_in(paramRef3); // in キーワードは必須ではない
-            ReferenceTypes_PassByReference_in(in paramRef3);
             Console.WriteLine($"呼び出し後 {string.Join(", ", paramRef3)}" );
 
             // 参照型の参照渡し out
@@ -93,7 +90,7 @@ namespace CSharpRefSample
             var paramRef4 = new int[] { 1, 2, 3 };
             Console.WriteLine($"呼び出し前 {string.Join(", ", paramRef4)}");
 
-            ReferenceTypes_PassByReference_out(out paramRef4);
+            ReferenceTypes_PassByReference_out(out paramRef4); // out キーワードは必須
             Console.WriteLine($"呼び出し後 {string.Join(", ", paramRef4)}");
 
             Console.WriteLine("\r\n---参照型の参照渡しで値の入れ替え---\r\n");
