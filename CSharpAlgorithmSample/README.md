@@ -28,5 +28,5 @@ VSCodeのターミナル(Command Prompt)で dotnet run を実行します。<br>
 Execute `dotnet run` in the VSCode terminal(Command Prompt).
 
 ```
-xxx\til\CSharpRefSample>dotnet run
+xxx\til\CSharpAlgorithmSample>dotnet run
 ```

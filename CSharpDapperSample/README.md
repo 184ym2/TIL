@@ -1,17 +1,17 @@
-## Program Name 👻
+## Program Name（プログラム名） 👻
 CSharpDapperSample
 
-## Overview 👻
+## Overview（概要） 👻
 C# Dapper サンプルコード<br>
 
 2022年12月25日作成<br>
 Created on December 25, 2022
 
-## Description 👻
+## Description（説明） 👻
 Qiita C# Advent Calendar 2022 25日目 の記事で使用したサンプルコードです。<br>
 Sample code used in the article for the 25th day of the Qiita C# Advent Calendar 2022.
 
-## Execution Environment 👻
+## Execution Environment（実行環境） 👻
 * Visual Studio Code 2019<br>
 * .NET SDK (global.json を反映):<br>
 Version:   6.0.100<br>
@@ -23,7 +23,7 @@ Commit:    9e8b04bbff<br>
  OS Platform: Windows<br>
  RID:         win10-x64<br>
 
-### Executable Procedure
+### Executable Procedure（実行手順）
 VSCodeのターミナル(Command Prompt)で dotnet run を実行します。<br>
 Execute `dotnet run` in the VSCode terminal(Command Prompt).
 
