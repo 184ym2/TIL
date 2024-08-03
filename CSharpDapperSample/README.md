@@ -23,10 +23,19 @@ Commit:    9e8b04bbff<br>
  OS Platform: Windows<br>
  RID:         win10-x64<br>
 
-### Executable Procedure（実行手順）
+## Executable Procedure（実行手順） 👻
+
+#### `dotnet run` を使用する場合 🌟
 VSCodeのターミナル(Command Prompt)で dotnet run を実行します。<br>
-Execute `dotnet run` in the VSCode terminal(Command Prompt).
+Execute `dotnet run` in the VSCode terminal(Command Prompt).<br>
+
+https://learn.microsoft.com/ja-jp/dotnet/core/tools/dotnet-run
 
 ```
-xxx\til\CSharpDapperSample>dotnet run
+xxx\til\CSharpAlgorithmSample>dotnet run
 ```
+
+#### `Visual Studio Code` の 実行とデバッグ(F5) を使用する場合 🌟
+
+launch.json を確認してください。プログラム名と同じ名前で作成しています。F5または▷キーの押下で実行可能です。<br>
+Check the launch.json. It is created with the same name as the program name and can be executed by pressing F5 or ▷ key.<br>

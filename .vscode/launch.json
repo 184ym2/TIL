@@ -1,27 +1,60 @@
 {
-    "version": "0.2.0",
     "configurations": [
-        {
-            // Use IntelliSense to find out which attributes exist for C# debugging
-            // Use hover for the description of the existing attributes
-            // For further information visit https://github.com/OmniSharp/omnisharp-vscode/blob/master/debugger-launchjson.md
-            "name": "CsharpRefSample (console)",
-            "type": "coreclr",
-            "request": "launch",
-            "preLaunchTask": "build",
-            // If you have changed target frameworks, make sure to update the program path.
-            "program": "${workspaceFolder}/CsharpRefSample/CsharpRefSample/bin/Debug/net5.0/CsharpRefSample.dll",
-            "args": [],
-            "cwd": "${workspaceFolder}/CsharpRefSample/CsharpRefSample",
-            // For more information about the 'console' field, see https://aka.ms/VSCode-CS-LaunchJson-Console
-            "console": "internalConsole",
-            "stopAtEntry": false,
-            "internalConsoleOptions":"openOnSessionStart"
-        },
-        {
-            "name": ".NET Core Attach",
-            "type": "coreclr",
-            "request": "attach"
-        }
+    {
+        "name": "CSharpAlgorithmSample (console)",
+        "type": "coreclr",
+        "request": "launch",
+        "preLaunchTask": "build",
+        "program": "${workspaceFolder}/CSharpAlgorithmSample/bin/Debug/net6.0/CSharpAlgorithmSample.dll",
+        "args": [],
+        "cwd": "${workspaceFolder}",
+        "stopAtEntry": false,
+        "console": "internalConsole"
+    },
+    {
+        "name": "CSharpDapperSample (console)",
+        "type": "coreclr",
+        "request": "launch",
+        "preLaunchTask": "build",
+        "program": "${workspaceFolder}/CSharpDapperSample/bin/Debug/net6.0/CSharpDapperSample.dll",
+        "args": [],
+        "cwd": "${workspaceFolder}",
+        "stopAtEntry": false,
+        "console": "internalConsole"
+    },
+    {
+        "name": "CSharpDuplicateObjectsSample (console)",
+        "type": "coreclr",
+        "request": "launch",
+        "preLaunchTask": "build",
+        "program": "${workspaceFolder}/CSharpDuplicateObjectsSample/bin/Debug/net6.0/CSharpDuplicateObjectsSample.dll",
+        "args": [],
+        "cwd": "${workspaceFolder}",
+        "stopAtEntry": false,
+        "console": "internalConsole"
+    },
+    {
+        "name": "CSharpRefSample (console)",
+        "type": "coreclr",
+        "request": "launch",
+        "preLaunchTask": "build",
+        "program": "${workspaceFolder}/CSharpRefSample/bin/Debug/net6.0/CSharpRefSample.dll",
+        "args": [],
+        "cwd": "${workspaceFolder}",
+        "stopAtEntry": false,
+        "console": "internalConsole"
+    },
+    {
+        "name": "CSharpWhimsicalWorkshop (console)",
+        "type": "coreclr",
+        "request": "launch",
+        "preLaunchTask": "build",
+        "program": "${workspaceFolder}/CSharpWhimsicalWorkshop/bin/Debug/net6.0/CSharpWhimsicalWorkshop.dll",
+        "args": [],
+        "cwd": "${workspaceFolder}",
+        "stopAtEntry": false,
+        "console": "internalConsole"
+    }
     ]
+
 }

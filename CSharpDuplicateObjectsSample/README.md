@@ -1,17 +1,17 @@
-## Program Name 👻
+## Program Name（プログラム名） 👻
 CSharpDuplicateObjectsSample
 
-## Overview 👻
+## Overview（概要） 👻
 C# オブジェクトの複製 サンプルコード<br>
 
 2020年12月13日作成<br>
 Created on December 13, 2020
 
-## Description 👻
+## Description（説明） 👻
 Qiita C# Advent Calendar 2020 16日目 の記事で使用したサンプルコードです。<br>
 Sample code used in the article for the 16th day of the Qiita C# Advent Calendar 2020.
 
-## Execution Environment 👻
+## Execution Environment（実行環境） 👻
 * Visual Studio Code 2019<br>
 * .NET SDK (global.json を反映):<br>
 Version:   6.0.100<br>
@@ -23,13 +23,21 @@ Commit:    9e8b04bbff<br>
  OS Platform: Windows<br>
  RID:         win10-x64<br>
 
-### Executable Procedure
+## Executable Procedure（実行手順） 👻
+
+#### `dotnet run` を使用する場合 🌟
 VSCodeのターミナル(Command Prompt)で dotnet run を実行します。<br>
-Execute `dotnet run` in the VSCode terminal(Command Prompt).
+Execute `dotnet run` in the VSCode terminal(Command Prompt).<br>
+
+https://learn.microsoft.com/ja-jp/dotnet/core/tools/dotnet-run
 
 ```
-xxx\til\CSharpDuplicateObjectsSample>dotnet run
+xxx\til\CSharpAlgorithmSample>dotnet run
 ```
 
+#### `Visual Studio Code` の 実行とデバッグ(F5) を使用する場合 🌟
+
+launch.json を確認してください。プログラム名と同じ名前で作成しています。F5または▷キーの押下で実行可能です。<br>
+Check the launch.json. It is created with the same name as the program name and can be executed by pressing F5 or ▷ key.<br>
 
 

@@ -8,7 +8,9 @@ namespace CSharpAlgorithmSample
         public void Run()
         {
             var array = new int[] { 10, 20, 30, 40, 50 };
+            // no1
             FindMinMax(array);
+            // no2
             Console.WriteLine(GetGetFibonacciNumberNumber(5));
         }
 
@@ -53,29 +55,27 @@ namespace CSharpAlgorithmSample
             最初の2つの項は0、1、それ以降の各項は前の2つの項の和
             0, 1, 1(0 + 1), 2(1 + 1), 3(1 + 2), 5(2 + 3), 8(3 + 5), 13(5 + 8), ...
 
-            n = 第 n 項として、結果を返す
+            n = 第n項として、結果を返す
 
-            第 0 項：0
-            第 1 項：1
-            第 2 項：0 + 1 = 1
-            第 3 項：1 + 1 = 2
-            第 4 項：1 + 2 = 3
-            第 5 項：2 + 3 = 5
-            第 6 項：3 + 5 = 8
+            第0項：0
+            第1項：1
+            第2項：0 + 1 = 1
+            第3項：1 + 1 = 2
+            第4項：1 + 2 = 3
+            第5項：2 + 3 = 5
+            第6項：3 + 5 = 8
             */
 
             // n が 0 の場合、0
             if (n == 0)
             {
                 return 0;
-
             }
 
             // n が 1 の場合、1
             if (n == 1)
             {
                 return 1;
-
             }
 
             // n が 2以上の場合、nの前の項(n - 1) + n のさらに前の項(n - 2) を求める必要がある
@@ -97,3 +97,4 @@ namespace CSharpAlgorithmSample
         }
     }
 }
+
