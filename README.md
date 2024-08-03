@@ -1,7 +1,6 @@
 <div align="center">
-<samp>
 
-# Unveiling the Secrets of Tea 
+# 𝕌𝕟𝕧𝕖𝕚𝕝𝕚𝕟𝕘 𝕥𝕙𝕖 𝕊𝕖𝕔𝕣𝕖𝕥𝕤 𝕠𝕗 𝕋𝕖𝕒
 ![ライセンス](https://img.shields.io/github/license/184ym2/til)
 ![ソースコードサイズ](https://img.shields.io/github/languages/code-size/184ym2/til)
 
@@ -52,8 +51,6 @@ Sample code repository for learning.</br>
 - `"console"`<br>
    プログラムの出力を表示するコンソールのタイプを指定します。`"internalConsole"`はVS Codeの内部コンソールを使用することを意味します。
 
-
-</samp>
 
 
 
