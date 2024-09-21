@@ -12,10 +12,9 @@ Qiita C# Advent Calendar 2021 25日目 の記事で使用したサンプルコ�
 Sample code used in the article for the 25th day of the Qiita C# Advent Calendar 2021.
 
 ## Execution Environment（実行環境） 👻
-* Visual Studio Code 2019<br>
+* Visual Studio Code<br>
 * .NET SDK (global.json を反映):<br>
-Version:   6.0.100<br>
-Commit:    9e8b04bbff<br>
+Version:   8.0.401<br>
 
 * ランタイム環境:<br>
  OS Name:     Windows<br>
