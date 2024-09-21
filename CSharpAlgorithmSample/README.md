@@ -12,10 +12,9 @@ Created on June 24, 2024
 Sample code for self-study.
 
 ## Execution Environment（実行環境） 👻
-* Visual Studio Code 2019<br>
+* Visual Studio Code <br>
 * .NET SDK (global.json を反映):<br>
-Version:   6.0.100<br>
-Commit:    9e8b04bbff<br>
+Version:   8.0.401<br>
 
 * ランタイム環境:<br>
  OS Name:     Windows<br>

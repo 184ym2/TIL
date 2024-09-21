@@ -11,10 +11,15 @@ namespace CSharpAlgorithmSample
             // no1
             FindMinMax(array);
             // no2
-            Console.WriteLine(GetGetFibonacciNumberNumber(5));
+            Console.WriteLine(GetFibonacciNumberNumber(5));
+            // no3
+            Console.WriteLine(ReverseString("こんにちは")); 
         }
 
-        // 配列の最小値と最大値を求めるための単純な線形探索の一種
+        /// <summary>
+        /// 配列の最小値と最大値を求める　※配列の最小値と最大値を求めるための単純な線形探索の一種
+        /// </summary>
+        /// <param name="array">対象の配列</param>
         public void FindMinMax(int[] array)
         {
             if (array == null || array.Length == 0)
@@ -46,8 +51,12 @@ namespace CSharpAlgorithmSample
             Console.WriteLine($"最大値: {maxValue}");
         }
 
-        // 再帰的なアルゴリズムの一種
-        public int GetGetFibonacciNumberNumber(int n)
+        /// <summary>
+        /// フィボナッチ数列の第 n 項を求める　※再帰的なアルゴリズムの一種
+        /// </summary>
+        /// <param name="n">正の整数</param>
+        /// <returns>フィボナッチ数列の第 n 項</returns>
+        public int GetFibonacciNumberNumber(int n)
         {
             /*
             フィボナッチ数列: 0, 1, 1, 2, 3, 5, 8, 13, ...
@@ -79,13 +88,13 @@ namespace CSharpAlgorithmSample
             }
 
             // n が 2以上の場合、nの前の項(n - 1) + n のさらに前の項(n - 2) を求める必要がある
-            return GetGetFibonacciNumberNumber(n - 1) + GetGetFibonacciNumberNumber(n - 2);
+            return GetFibonacciNumberNumber(n - 1) + GetFibonacciNumberNumber(n - 2);
 
             /*
             n = 3 の場合
 
-            1. GetGetFibonacciNumberNumber(3) GetGetFibonacciNumberNumber(2) と GetGetFibonacciNumberNumber(1) を呼び出します。
-                ・GetGetFibonacciNumberNumber(2) は、GetFibonacciNumber(1) と GetFibonacciNumber(0) を呼び出します。
+            1. GetFibonacciNumber(3) GetFibonacciNumber(2) と GetFibonacciNumber(1) を呼び出します。
+                ・GetFibonacciNumber(2) は、GetFibonacciNumber(1) と GetFibonacciNumber(0) を呼び出します。
                 ・GetFibonacciNumber(1) は 1 を返します。
                 ・GetFibonacciNumber(0) は 0 を返します。
                 ・よって、GetFibonacciNumber(2) は GetFibonacciNumber(1) + GetFibonacciNumber(0) = 1 + 0 = 「1」 を返します。
@@ -93,7 +102,29 @@ namespace CSharpAlgorithmSample
             3. GetFibonacciNumber(3) は、GetFibonacciNumber(2) + GetFibonacciNumber(1) = 1 + 1 = 「2」 を返します。
             
             */
+        }
 
+        /// <summary>
+        /// 文字列を逆順にする
+        /// </summary>
+        /// <param name="str">対象の文字列</param>
+        /// <returns>逆順にした文字列</returns>
+        public string ReverseString(string str)
+        {
+            // 新しいchar型の配列を作成し、str.Length と同じ長さを指定する
+            var result = new char[str.Length];
+
+            // str.Length は　文字列の長さを取得する
+            for (var i = 0; i < str.Length; i++)
+            {
+                // 例）こんにちは  1回目：は(5 - 0 - 1) 2回目：ち(5 - 0 - 2)…
+                result[i] = str[str.Length - i - 1];
+            }
+
+            return new string(result);
+
+            // 別解
+            // return new string(str.Reverse().ToArray());  
         }
     }
 }
