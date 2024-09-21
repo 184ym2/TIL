@@ -17,14 +17,14 @@
         "configurations": [ // 複数のデバッグ構成を持つことができ、それぞれが独立した設定となる
         {
             "name": ".NET Core Launch (console)",  // 必須
-            "type": "coreclr", // 必須                    
-            "request": "launch", // 必須                  
+            "type": "coreclr", // 必須
+            "request": "launch", // 必須
             "preLaunchTask": "build",              
             "program": "${workspaceFolder}/bin/Debug/net6.0/MyApp.dll", // 必須
             "args": [],                            
-            "cwd": "${workspaceFolder}", // 必須          
+            "cwd": "${workspaceFolder}", // 必須
             "stopAtEntry": false,                  
-            "console": "internalConsole", // 必須         
+            "console": "internalConsole", // 必須
             "logging": {
                 "engineLogging": false,
                 "trace": true,
