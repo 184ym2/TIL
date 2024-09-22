@@ -5,7 +5,7 @@ VisualStudioVersion = 17.5.002.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpAlgorithmSample", "CSharpAlgorithmSample\CSharpAlgorithmSample.csproj", "{A06F5BD5-2B73-4FFB-97A8-48EEE80F8831}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpDapperSample", "CSharpDapperSample\CSharpDapperSample.csproj", "{297A3414-CB67-4C60-BDAC-03EBBE933A57}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CSharpDapperAndSQLSample", "CSharpDapperAndSQLSample\CSharpDapperAndSQLSample.csproj", "{C6A33374-56F5-4CE4-A6E5-C5209EC3AE9B}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CSharpDuplicateObjectsSample", "CSharpDuplicateObjectsSample\CSharpDuplicateObjectsSample.csproj", "{669AAD75-73B3-496D-9E45-0B0EB68DF449}"
 EndProject
@@ -23,10 +23,10 @@ Global
 		{A06F5BD5-2B73-4FFB-97A8-48EEE80F8831}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A06F5BD5-2B73-4FFB-97A8-48EEE80F8831}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A06F5BD5-2B73-4FFB-97A8-48EEE80F8831}.Release|Any CPU.Build.0 = Release|Any CPU
-		{297A3414-CB67-4C60-BDAC-03EBBE933A57}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{297A3414-CB67-4C60-BDAC-03EBBE933A57}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{297A3414-CB67-4C60-BDAC-03EBBE933A57}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{297A3414-CB67-4C60-BDAC-03EBBE933A57}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C6A33374-56F5-4CE4-A6E5-C5209EC3AE9B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C6A33374-56F5-4CE4-A6E5-C5209EC3AE9B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C6A33374-56F5-4CE4-A6E5-C5209EC3AE9B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C6A33374-56F5-4CE4-A6E5-C5209EC3AE9B}.Release|Any CPU.Build.0 = Release|Any CPU
 		{669AAD75-73B3-496D-9E45-0B0EB68DF449}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{669AAD75-73B3-496D-9E45-0B0EB68DF449}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{669AAD75-73B3-496D-9E45-0B0EB68DF449}.Release|Any CPU.ActiveCfg = Release|Any CPU
