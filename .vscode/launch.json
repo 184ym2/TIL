@@ -13,11 +13,11 @@
         "console": "internalConsole"
     },
     {
-        "name": "CSharpDapperSample (console)",
+        "name": "CSharpDapperAndSQLSample (console)",
         "type": "coreclr",
         "request": "launch",
         "preLaunchTask": "build",
-        "program": "${workspaceFolder}/CSharpDapperSample/bin/Debug/net6.0/CSharpDapperSample.dll",
+        "program": "${workspaceFolder}/CSharpDapperAndSQLSample/bin/Debug/net8.0/CSharpDapperAndSQLSample.dll",
         "args": [],
         "cwd": "${workspaceFolder}",
         "stopAtEntry": false,
