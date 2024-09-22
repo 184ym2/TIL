@@ -5,8 +5,10 @@ namespace CSharpDapperAndSQLSample;
 
 public class DataBaseExecuteSample
 {
-    // 相対パスの場合、実行するフォルダと同じ場所にデータベースファイルを置きます。
-    // データベースファイルがない場合、空のデータベースを作成します。
+    // 相対パスの場合、実行時のルートディレクトリにデータベースファイルを置く必要があります。
+    // dotnet run の場合、必ずプロジェクトのルートディレクトリ（CSharpDapperAndSQLSample）から実行されますが、
+    // F5実行の場合、launch.json の cwd で指定されたディレクトリから実行します。そのため、cwd の設定を必ず確認してください。
+    // 実行時のルートディレクトリにデータベースファイルがない場合、空のデータベースを作成します。
     private const string DataSource = @"Datasource=advent.db";
 
     /// <summary>
@@ -18,12 +20,11 @@ public class DataBaseExecuteSample
         // SqliteConnection にそのまま DataSource を渡します。
         using var connection = new SqliteConnection(DataSource);
 
-        using (var command = connection.CreateCommand())
-        {
-            connection.Open();
+        using var command = connection.CreateCommand();
+        connection.Open();
 
-            // 追加
-            var insertSql = @"
+        // 追加
+        var insertSql = @"
             INSERT INTO takarazuka_kinen
             (
                 wakuban,
@@ -49,44 +50,43 @@ public class DataBaseExecuteSample
                 @updatedate
             );";
 
-            // Anonymous Parameter でパラメーターを作成します。
-            var insertResult = connection.Execute(insertSql, new
-            {
-                wakuban = "1",
-                bamei = "ライラック",
-                seibetu = "牝",
-                barei = "4",
-                kinryo = "56",
-                kisyu = "Mデムーロ",
-                kyusya = "相沢",
-                createdate = DateTime.Now,
-                updatedate = DateTime.Now,
-            });
+        // Anonymous Parameter でパラメーターを作成します。
+        var insertResult = connection.Execute(insertSql, new
+        {
+            wakuban = "1",
+            bamei = "ライラック",
+            seibetu = "牝",
+            barei = "4",
+            kinryo = "56",
+            kisyu = "Mデムーロ",
+            kyusya = "相沢",
+            createdate = DateTime.Now,
+            updatedate = DateTime.Now,
+        });
 
-            Console.WriteLine($"{insertResult}件追加しました。");
+        Console.WriteLine($"{insertResult}件追加しました。");
 
-            var targetNo = 1;
+        var targetNo = 1;
 
-            // 更新
-            var updateSql = @"UPDATE takarazuka_kinen SET barei = 5 WHERE umaban = @umaban";
-            var updateResult = connection.Execute(updateSql, new { umaban = targetNo });
-            Console.WriteLine($"{updateResult}件更新しました。");
+        // 更新
+        var updateSql = @"UPDATE takarazuka_kinen SET barei = 5 WHERE umaban = @umaban";
+        var updateResult = connection.Execute(updateSql, new { umaban = targetNo });
+        Console.WriteLine($"{updateResult}件更新しました。");
 
-            // 削除
-            var deleteSql = @"DELETE FROM takarazuka_kinen WHERE umaban = @umaban";
-            var deleteResult = connection.Execute(deleteSql, new { umaban = targetNo });
-            Console.WriteLine($"{deleteResult}件削除しました。");
+        // 削除
+        var deleteSql = @"DELETE FROM takarazuka_kinen WHERE umaban = @umaban";
+        var deleteResult = connection.Execute(deleteSql, new { umaban = targetNo });
+        Console.WriteLine($"{deleteResult}件削除しました。");
 
-            // COUNT
-            var countSql = @"SELECT COUNT(*) FROM arima_kinen";
-            var count = connection.ExecuteScalar(countSql);
-            Console.WriteLine($"2022年の有馬記念は計{count}頭が出走しました。");
+        // COUNT
+        var countSql = @"SELECT COUNT(*) FROM arima_kinen";
+        var count = connection.ExecuteScalar(countSql);
+        Console.WriteLine($"2022年の有馬記念は計{count}頭が出走しました。");
 
-            // SUM
-            var sumSql = @"SELECT SUM(barei) FROM arima_kinen";
-            var sum = connection.ExecuteScalar(sumSql);
-            Console.WriteLine($"馬齢の合計は{sum}です。");
-        }
+        // SUM
+        var sumSql = @"SELECT SUM(barei) FROM arima_kinen";
+        var sum = connection.ExecuteScalar(sumSql);
+        Console.WriteLine($"馬齢の合計は{sum}です。");
     }
 }
 
