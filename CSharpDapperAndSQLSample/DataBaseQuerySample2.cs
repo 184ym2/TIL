@@ -31,6 +31,6 @@ public class NoTypeHandler : SqlMapper.TypeHandler<UmaNo>
 
     // データベースの値をパースして型付けされた値に戻す
     public override UmaNo Parse(object value)
-        => new UmaNo(value.ToString());
+        => new(value.ToString());
 }
 
