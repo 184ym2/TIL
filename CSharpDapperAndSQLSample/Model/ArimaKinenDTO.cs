@@ -1,5 +1,8 @@
 namespace CSharpDapperAndSQLSample;
 
+/// <summary>
+/// 有馬記念のデータを格納するクラス（取得のみ使用）
+/// </summary>
 public class ArimaKinenDTO
 {
     /// <summary>
@@ -15,12 +18,12 @@ public class ArimaKinenDTO
     /// <summary>
     /// 馬名
     /// </summary>
-    public string Bamei { get; set; }
+    public string? Bamei { get; set; }
 
     /// <summary>
     /// 性別
     /// </summary>
-    public string Seibetu { get; set; }
+    public string? Seibetu { get; set; }
 
     /// <summary>
     /// 馬齢
@@ -35,10 +38,10 @@ public class ArimaKinenDTO
     /// <summary>
     /// 騎手
     /// </summary>
-    public string Kisyu { get; set; }
+    public string? Kisyu { get; set; }
 
     /// <summary>
     /// 厩舎
     /// </summary>
-    public string Kyusya { get; set; }
+    public string? Kyusya { get; set; }
 }

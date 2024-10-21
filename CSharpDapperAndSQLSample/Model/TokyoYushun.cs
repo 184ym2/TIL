@@ -1,6 +1,9 @@
 namespace CSharpDapperAndSQLSample;
 
-public class TakarazukaKinen(int wakuban, int umaban, string bamei, string seibetu, int barei, int kinryo, string Kisyu, string kyusya)
+/// <summary>
+/// 東京優駿（日本ダービー）のデータを格納するクラス
+/// </summary>
+public class TokyoYushun(int wakuban, UmaBan umaban, string bamei, string seibetu, int barei, int kinryo, string Kisyu, string kyusya)
 {
     /// <summary>
     /// 枠番
@@ -10,7 +13,7 @@ public class TakarazukaKinen(int wakuban, int umaban, string bamei, string seibe
     /// <summary>
     /// 馬番
     /// </summary>
-    public int Umaban { get; } = umaban;
+    public UmaBan Umaban { get; } = umaban;
 
     /// <summary>
     /// 馬名

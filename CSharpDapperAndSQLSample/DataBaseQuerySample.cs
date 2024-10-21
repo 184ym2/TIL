@@ -41,7 +41,7 @@ public class DataBaseQuerySample
         var singleRow = connection.QuerySingleOrDefault<ArimaKinenDTO>(sql2);
         Console.WriteLine("\r\n1行を取得し、1行目のレコードを返します。");
 
-        // 1行を取得する場合、取得したデータがnullかどうかをチェックして処理を分岐することが多い
+        // 1行を取得する場合、取得したデータがnullかどうかをチェックして処理を分岐することがある
         if (singleRow == null)
         {
             // エラーの処理など
@@ -55,7 +55,7 @@ public class DataBaseQuerySample
         var firstRow = connection.QueryFirstOrDefault<ArimaKinenDTO>(sql3);
         Console.WriteLine("\r\n複数行を取得し、1行目のレコードを返します。");
 
-        // 1行を取得する場合、取得したデータがnullかどうかをチェックして処理を分岐することが多い
+        // 1行を取得する場合、取得したデータがnullかどうかをチェックして処理を分岐することがある
         if (firstRow == null)
         {
             // エラーの処理など
@@ -90,7 +90,7 @@ public class DataBaseQuerySample
             Console.WriteLine($"{row.Wakuban} {row.Umaban} {row.Bamei} {row.Seibetu}{row.Barei} {row.Kinryo} {row.Kisyu} {row.Kyusya}");
         }
 
-        Console.WriteLine($"\r\n{firstReadRow.Wakuban} {firstReadRow.Umaban} {firstReadRow.Bamei} {firstReadRow.Seibetu}{firstReadRow.Barei} {firstReadRow.Kinryo} {firstReadRow.Kisyu} {firstReadRow.Kyusya}");
+        Console.WriteLine($"\r\n{firstReadRow?.Wakuban} {firstReadRow?.Umaban} {firstReadRow?.Bamei} {firstReadRow?.Seibetu}{firstReadRow?.Barei} {firstReadRow?.Kinryo} {firstReadRow?.Kisyu} {firstReadRow?.Kyusya}");
 
         Console.WriteLine($"\r\n2022年の有馬記念は計{count}頭が出走しました。");
 
@@ -103,7 +103,7 @@ public class DataBaseQuerySample
         var apResult = connection.QueryFirstOrDefault<ArimaKinenDTO>(sql5, new { umaban = param1 });
 
         Console.WriteLine("\r\n馬番が3の馬を返します。");
-        Console.WriteLine($"{apResult.Wakuban} {apResult.Umaban} {apResult.Bamei} {apResult.Seibetu}{apResult.Barei} {apResult.Kinryo} {apResult.Kisyu} {apResult.Kyusya}");
+        Console.WriteLine($"{apResult?.Wakuban} {apResult?.Umaban} {apResult?.Bamei} {apResult?.Seibetu}{apResult?.Barei} {apResult?.Kinryo} {apResult?.Kisyu} {apResult?.Kyusya}");
 
         // 動的パラメーター(Dynamic Parameters)の場合
         // Dynamic Parametersを作成し、Addメソッドでパラメーターを作成します。
@@ -113,7 +113,7 @@ public class DataBaseQuerySample
         var dpResult = connection.QueryFirstOrDefault<ArimaKinenDTO>(sql5, parameters);
 
         Console.WriteLine("\r\n馬番が4の馬を返します。");
-        Console.WriteLine($"{dpResult.Wakuban} {dpResult.Umaban} {dpResult.Bamei} {dpResult.Seibetu}{dpResult.Barei} {dpResult.Kinryo} {dpResult.Kisyu} {dpResult.Kyusya}");
+        Console.WriteLine($"{dpResult?.Wakuban} {dpResult?.Umaban} {dpResult?.Bamei} {dpResult?.Seibetu}{dpResult?.Barei} {dpResult?.Kinryo} {dpResult?.Kisyu} {dpResult?.Kyusya}");
 
         // 5. WHERE句のIN句パラメーターを設定する
         var sql6 = @"SELECT * FROM arima_kinen WHERE umaban in @umaban;";

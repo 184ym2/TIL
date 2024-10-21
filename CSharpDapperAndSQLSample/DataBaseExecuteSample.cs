@@ -133,6 +133,29 @@ public class DataBaseExecuteSample
         var multiInsertResult = connection.Execute(insertSql, multiInsertParams);
         Console.WriteLine($"\r\n{multiInsertResult}件追加しました。");
 
+        /*
+        匿名パラメーター(Anonymous Parameter) を先に作成するのではなく、追加したいデータを foreach で回す方法もあります。
+
+        foreach (var item in addList)
+        {
+            var multiInsertResult = connection.Execute(insertSql, new
+            {
+                wakuban = x.Wakuban,
+                bamei = x.Bamei,
+                seibetu = x.Seibetu,
+                barei = x.Barei,
+                kinryo = x.Kinryo,
+                kisyu = x.Kisyu,
+                kyusya = x.Kyusya,
+                createdate = DateTime.Now,
+                updatedate = DateTime.Now
+            });
+
+            Console.WriteLine($"\r\n{multiInsertResult}件追加しました。");
+        }   
+
+        */
+
         // 複数のUPDATE: その1
         var multiUpdateSql = @"
             UPDATE takarazuka_kinen 
