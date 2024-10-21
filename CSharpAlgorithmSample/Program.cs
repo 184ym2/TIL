@@ -6,8 +6,7 @@ namespace CSharpAlgorithmSample
     {
         static void Main(string[] args)
         {
-            var examples = new AlgorithmExamples();
-            examples.Run();
+            AlgorithmExamples.Run();
         }
     }
 }

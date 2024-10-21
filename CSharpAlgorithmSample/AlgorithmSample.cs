@@ -5,7 +5,7 @@ namespace CSharpAlgorithmSample
     /// </summary>
     public class AlgorithmExamples
     {
-        public void Run()
+        public static void Run()
         {
             var array = new int[] { 10, 20, 30, 40, 50 };
             // no1
@@ -13,14 +13,17 @@ namespace CSharpAlgorithmSample
             // no2
             Console.WriteLine(GetFibonacciNumberNumber(5));
             // no3
-            Console.WriteLine(ReverseString("こんにちは")); 
+            Console.WriteLine(ReverseString("こんにちは"));
+            // no4
+            Console.WriteLine(CheckPalindrome("racecar"));
+            Console.WriteLine(CheckPalindrome("hello"));
         }
 
         /// <summary>
         /// 配列の最小値と最大値を求める　※配列の最小値と最大値を求めるための単純な線形探索の一種
         /// </summary>
         /// <param name="array">対象の配列</param>
-        public void FindMinMax(int[] array)
+        public static void FindMinMax(int[] array)
         {
             if (array == null || array.Length == 0)
             {
@@ -56,7 +59,7 @@ namespace CSharpAlgorithmSample
         /// </summary>
         /// <param name="n">正の整数</param>
         /// <returns>フィボナッチ数列の第 n 項</returns>
-        public int GetFibonacciNumberNumber(int n)
+        public static int GetFibonacciNumberNumber(int n)
         {
             /*
             フィボナッチ数列: 0, 1, 1, 2, 3, 5, 8, 13, ...
@@ -109,7 +112,7 @@ namespace CSharpAlgorithmSample
         /// </summary>
         /// <param name="str">対象の文字列</param>
         /// <returns>逆順にした文字列</returns>
-        public string ReverseString(string str)
+        public static string ReverseString(string str)
         {
             // 新しいchar型の配列を作成し、str.Length と同じ長さを指定する
             var result = new char[str.Length];
@@ -117,7 +120,9 @@ namespace CSharpAlgorithmSample
             // str.Length は　文字列の長さを取得する
             for (var i = 0; i < str.Length; i++)
             {
-                // 例）こんにちは  1回目：は(5 - 0 - 1) 2回目：ち(5 - 0 - 2)…
+                // 例）こんにちは 
+                // 1回目：「は(5 - 0 - 1 = str[4])」を result[0] に設定
+                // 2回目：「ち(5 - 0 - 2 = str[3])」を result[1] に設定
                 result[i] = str[str.Length - i - 1];
             }
 
@@ -125,6 +130,26 @@ namespace CSharpAlgorithmSample
 
             // 別解
             // return new string(str.Reverse().ToArray());  
+        }
+
+        /// <summary>
+        /// 文字列が回文かどうかを確認する
+        /// ※回文とは、前から読んでも後ろから読んでも同じ文字列のこと
+        /// </summary>
+        /// <param name="str">対象の文字列</param>
+        /// <returns>回文かどうか</returns>
+        public static bool CheckPalindrome(string str)
+        {
+            var reversed = ReverseString(str);
+
+            if (str == reversed)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
     }
 }
