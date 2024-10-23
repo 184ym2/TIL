@@ -12,7 +12,7 @@ public class DataBaseExecuteSample
     private const string DataSource = @"Datasource=advent.db";
 
     /// <summary>
-    /// 追加・更新・削除に関するメソッド
+    /// 追加、更新、削除、集計の例
     /// </summary>
     public static void Execute()
     {
@@ -23,6 +23,19 @@ public class DataBaseExecuteSample
         using var command = connection.CreateCommand();
         connection.Open();
 
+        InsertSingleRecord(connection);
+        UpdateAndDeleteSingleRecord(connection);
+        ExecuteScalarQueries(connection);
+        InsertMultipleRecords(connection);
+        UpdateMultipleRecords(connection);
+        DeleteAllRecords(connection);
+    }
+
+    /// <summary>
+    /// 単一レコードの挿入
+    /// </summary>
+    private static void InsertSingleRecord(SqliteConnection connection)
+    {
         // 追加
         var insertSql = @"
             INSERT INTO takarazuka_kinen
@@ -66,7 +79,13 @@ public class DataBaseExecuteSample
         });
 
         Console.WriteLine($"\r\n{insertResult}件追加しました。");
+    }
 
+    /// <summary>
+    /// 単一レコードの更新と削除
+    /// </summary>
+    private static void UpdateAndDeleteSingleRecord(SqliteConnection connection)
+    {
         var targetNo = 1;
 
         // 更新
@@ -80,7 +99,13 @@ public class DataBaseExecuteSample
         // 匿名パラメーター(Anonymous Parameter) でパラメーターを作成します。
         var deleteResult = connection.Execute(deleteSql, new { umaban = targetNo });
         Console.WriteLine($"\r\n{deleteResult}件削除しました。");
+    }
 
+    /// <summary>
+    /// COUNT と SUM クエリ
+    /// </summary>
+    private static void ExecuteScalarQueries(SqliteConnection connection)
+    {
         // COUNT
         var countSql = @"SELECT COUNT(*) FROM arima_kinen";
         var count = connection.ExecuteScalar(countSql);
@@ -90,6 +115,38 @@ public class DataBaseExecuteSample
         var sumSql = @"SELECT SUM(barei) FROM arima_kinen";
         var sum = connection.ExecuteScalar(sumSql);
         Console.WriteLine($"\r\n2022年の有馬記念出走馬の馬齢合計は{sum}です。");
+    }
+
+    /// <summary>
+    /// 複数レコードの挿入
+    /// </summary>
+    private static void InsertMultipleRecords(SqliteConnection connection)
+    {
+        var insertSql = @"
+            INSERT INTO takarazuka_kinen
+            (
+                wakuban,
+                bamei,
+                seibetu,
+                barei,
+                kinryo,
+                kisyu,
+                kyusya,
+                createdate,
+                updatedate
+            )
+            VALUES
+            (
+                @wakuban,
+                @bamei,
+                @seibetu,
+                @barei,
+                @kinryo,
+                @kisyu,
+                @kyusya,
+                @createdate,
+                @updatedate
+            );";
 
         // 複数のINSERT
         // パラメーター用のリストをTakarazukaKinenクラスを使用して作成します。
@@ -155,7 +212,13 @@ public class DataBaseExecuteSample
         }   
 
         */
+    }
 
+    /// <summary>
+    /// 複数レコードの更新
+    /// </summary>
+    private static void UpdateMultipleRecords(SqliteConnection connection)
+    {
         // 複数のUPDATE: その1
         var multiUpdateSql = @"
             UPDATE takarazuka_kinen 
@@ -188,12 +251,19 @@ public class DataBaseExecuteSample
         var multiUpdateParams2 = new { updatedate = updateDate, umabanList };
         var multiUpdateResult2 = connection.Execute(multiUpdateSql2, multiUpdateParams2);
         Console.WriteLine($"\r\n{multiUpdateResult2}件更新しました。");
+    }
 
+    /// <summary>
+    /// 全レコードの削除
+    /// </summary>
+    private static void DeleteAllRecords(SqliteConnection connection)
+    {
         // テスト用データベースのデータを全て削除
         var deleteSql2 = @"DELETE FROM takarazuka_kinen";
         var deleteResult2 = connection.Execute(deleteSql2);
         Console.WriteLine($"\r\n{deleteResult2}件削除しました。");
     }
+
 }
 
 
