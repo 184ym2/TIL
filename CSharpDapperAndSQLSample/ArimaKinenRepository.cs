@@ -4,7 +4,7 @@ using Microsoft.Data.Sqlite;
 
 namespace CSharpDapperAndSQLSample;
 
-public class DataBaseQuerySample
+public class ArimaKinenRepository
 {
     // 相対パスの場合、実行時のルートディレクトリにデータベースファイルを置く必要があります。
     // dotnet run の場合、必ずプロジェクトのルートディレクトリ（CSharpDapperAndSQLSample）から実行されますが、
@@ -13,9 +13,9 @@ public class DataBaseQuerySample
     private const string DataSource = @"Datasource=advent.db";
 
     /// <summary>
-    /// 取得の例
+    /// 取得、集計の例
     /// </summary>
-    public static void Query()
+    public static void Execute()
     {
         // DataSource 以外のプロパティを設定しないため SqliteConnectionStringBuilder を経由しません。
         // SqliteConnection にそのまま DataSource を渡します。
@@ -30,6 +30,7 @@ public class DataBaseQuerySample
         QueryMultipleSelects(connection);
         QueryWithSingleParameter(connection);
         QueryWithInClause(connection);
+        ExecuteScalarQueries(connection);
     }
 
     /// <summary>
@@ -167,6 +168,22 @@ public class DataBaseQuerySample
         {
             Console.WriteLine($"{row.Wakuban} {row.Umaban} {row.Bamei} {row.Seibetu}{row.Barei} {row.Kinryo} {row.Kisyu} {row.Kyusya}");
         }
+    }
+
+    /// <summary>
+    /// COUNT と SUM クエリ
+    /// </summary>
+    private static void ExecuteScalarQueries(SqliteConnection connection)
+    {
+        // COUNT
+        var countSql = @"SELECT COUNT(*) FROM arima_kinen";
+        var count = connection.ExecuteScalar(countSql);
+        Console.WriteLine($"\r\n2022年の有馬記念は計{count}頭が出走しました。");
+
+        // SUM
+        var sumSql = @"SELECT SUM(barei) FROM arima_kinen";
+        var sum = connection.ExecuteScalar(sumSql);
+        Console.WriteLine($"\r\n2022年の有馬記念出走馬の馬齢合計は{sum}です。");
     }
 
 }

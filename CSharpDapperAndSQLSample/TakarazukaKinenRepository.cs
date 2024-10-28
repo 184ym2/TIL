@@ -3,7 +3,7 @@ using Microsoft.Data.Sqlite;
 
 namespace CSharpDapperAndSQLSample;
 
-public class DataBaseExecuteSample
+public class TakarazukaKinenRepository
 {
     // 相対パスの場合、実行時のルートディレクトリにデータベースファイルを置く必要があります。
     // dotnet run の場合、必ずプロジェクトのルートディレクトリ（CSharpDapperAndSQLSample）から実行されますが、
@@ -12,7 +12,7 @@ public class DataBaseExecuteSample
     private const string DataSource = @"Datasource=advent.db";
 
     /// <summary>
-    /// 追加、更新、削除、集計の例
+    /// 追加、更新、削除の例
     /// </summary>
     public static void Execute()
     {
@@ -25,7 +25,6 @@ public class DataBaseExecuteSample
 
         InsertSingleRecord(connection);
         UpdateAndDeleteSingleRecord(connection);
-        ExecuteScalarQueries(connection);
         InsertMultipleRecords(connection);
         UpdateMultipleRecords(connection);
         DeleteAllRecords(connection);
@@ -64,7 +63,7 @@ public class DataBaseExecuteSample
             );";
 
         // 匿名パラメーター(Anonymous Parameter) でパラメーターを作成します。
-        // 馬番(umaban)は自動採番のため、パラメーターを使用しません。
+        // ※takarazuka_kinenの馬番(umaban)は自動採番のため、パラメーターを使用しません。
         var insertResult = connection.Execute(insertSql, new
         {
             wakuban = "1",
@@ -101,21 +100,7 @@ public class DataBaseExecuteSample
         Console.WriteLine($"\r\n{deleteResult}件削除しました。");
     }
 
-    /// <summary>
-    /// COUNT と SUM クエリ
-    /// </summary>
-    private static void ExecuteScalarQueries(SqliteConnection connection)
-    {
-        // COUNT
-        var countSql = @"SELECT COUNT(*) FROM arima_kinen";
-        var count = connection.ExecuteScalar(countSql);
-        Console.WriteLine($"\r\n2022年の有馬記念は計{count}頭が出走しました。");
 
-        // SUM
-        var sumSql = @"SELECT SUM(barei) FROM arima_kinen";
-        var sum = connection.ExecuteScalar(sumSql);
-        Console.WriteLine($"\r\n2022年の有馬記念出走馬の馬齢合計は{sum}です。");
-    }
 
     /// <summary>
     /// 複数レコードの挿入
@@ -168,11 +153,11 @@ public class DataBaseExecuteSample
             new(7, 14, "ブレークアップ", "牡", 5, 58, "川田", "吉岡"),
             new(8, 15, "ユニコーンライオン", "牡", 7, 58, "坂井", "矢作"),
             new(8, 16, "モズベッロ", "牡", 7, 58, "角田河", "森田"),
-            new(8, 17, "ドゥラエレーデ", "牡", 3, 53, "幸", "池添"),
+            new(8, 17, "ドゥラエレーデ", "牡", 3, 53, "幸", "池添")
         };
 
         // パラメーター用のリストをDapperに渡すための匿名パラメーター(Anonymous Parameter) に変換します。
-        // 馬番(umaban)は自動採番のため、パラメーターを使用しません。
+        // ※takarazuka_kinenの馬番(umaban)は自動採番のため、パラメーターを使用しません。
         var multiInsertParams = addList.Select(x => new
         {
             wakuban = x.Wakuban,

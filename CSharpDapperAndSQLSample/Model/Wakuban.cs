@@ -7,8 +7,8 @@ namespace CSharpDapperAndSQLSample;
 
 // DatabaseとCustom型のマッピング
 
-// 馬番のオブジェクト
-public record struct UmaBan
+// 枠番のオブジェクト
+public record struct Wakuban
 {
     /// <summary>
     /// 馬番のパターン  
@@ -24,7 +24,7 @@ public record struct UmaBan
     /// コンストラクタ
     /// </summary>
     /// <param name="value">文字列</param>
-    public UmaBan(string value)
+    public Wakuban(string value)
     {
         if (Regex.IsMatch(value, Pattern))
         {
@@ -32,18 +32,18 @@ public record struct UmaBan
         }
         else
         {
-            throw new ArgumentException($"馬番の値が不正です。{value}");
+            throw new ArgumentException($"枠番の値が不正です。{value}");
         }
     }
 
     /// <summary>
-    /// 文字列を馬番に変換します。
+    /// 文字列を枠番に変換します。
     /// </summary>
     /// <param name="value">変換対象の文字列</param>
-    /// <returns>馬番</returns>
-    public static UmaBan Parse(string value)
+    /// <returns>枠番</returns>
+    public static Wakuban Parse(string value)
     {
-        return new UmaBan(value);
+        return new Wakuban(value);
     }
 }
 

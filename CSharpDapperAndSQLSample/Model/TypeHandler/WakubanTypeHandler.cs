@@ -18,23 +18,23 @@ namespace CSharpDapperAndSQLSample;
 */
 
 /// <summary>
-/// UmaBanの型ハンドラー
+/// Wakubanの型ハンドラー
 /// </summary>
-public class UmaBanTypeHandler : SqlMapper.TypeHandler<UmaBan>
+public class WakubanTypeHandler : SqlMapper.TypeHandler<Wakuban>
 {
-    public override void SetValue(IDbDataParameter parameter, UmaBan value)
+    public override void SetValue(IDbDataParameter parameter, Wakuban value)
     {
         parameter.DbType = DbType.String;
         parameter.Value = value.Value;
     }
 
-    public override UmaBan Parse(object value)
+    public override Wakuban Parse(object value)
     {
         if (value is string stringValue)
         {
-            return new UmaBan(stringValue);
+            return new Wakuban(stringValue);
         }
-        throw new ArgumentException($"UmaBanに変換できない値です: {value}");
+        throw new ArgumentException($"枠番に変換できない値です: {value}");
     }
 }
 

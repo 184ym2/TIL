@@ -3,12 +3,17 @@ namespace CSharpDapperAndSQLSample;
 /// <summary>
 /// 東京優駿（日本ダービー）のデータを格納するクラス
 /// </summary>
-public class TokyoYushun(int wakuban, UmaBan umaban, string bamei, string seibetu, int barei, int kinryo, string Kisyu, string kyusya)
+public class TokyoYushun(int Kaisu, Wakuban wakuban, UmaBan umaban, string bamei, string seibetu, int barei, int kinryo, string Kisyu, string kyusya)
 {
+    /// <summary>
+    /// 回数
+    /// </summary>
+    public int Kaisu { get; } = Kaisu;
+
     /// <summary>
     /// 枠番
     /// </summary>
-    public int Wakuban { get; } = wakuban;
+    public Wakuban Wakuban { get; } = wakuban;
 
     /// <summary>
     /// 馬番
