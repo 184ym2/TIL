@@ -1,61 +1,60 @@
 {
     "version": "0.2.0",
     "configurations": [
-    {
-        "name": "CSharpAlgorithmSample (console)",
-        "type": "coreclr",
-        "request": "launch",
-        "preLaunchTask": "build",
-        "program": "${workspaceFolder}/CSharpAlgorithmSample/bin/Debug/net6.0/CSharpAlgorithmSample.dll",
-        "args": [],
-        "cwd": "${workspaceFolder}/CSharpAlgorithmSample",
-        "stopAtEntry": false,
-        "console": "internalConsole"
-    },
-    {
-        "name": "CSharpDapperAndSQLSample (console)",
-        "type": "coreclr",
-        "request": "launch",
-        "preLaunchTask": "build",
-        "program": "${workspaceFolder}/CSharpDapperAndSQLSample/bin/Debug/net8.0/CSharpDapperAndSQLSample.dll",
-        "args": [],
-        "cwd": "${workspaceFolder}/CSharpDapperAndSQLSample",
-        "stopAtEntry": false,
-        "console": "internalConsole"
-    },
-    {
-        "name": "CSharpDuplicateObjectsSample (console)",
-        "type": "coreclr",
-        "request": "launch",
-        "preLaunchTask": "build",
-        "program": "${workspaceFolder}/CSharpDuplicateObjectsSample/bin/Debug/net6.0/CSharpDuplicateObjectsSample.dll",
-        "args": [],
-        "cwd": "${workspaceFolder}/CSharpDuplicateObjectsSample",
-        "stopAtEntry": false,
-        "console": "internalConsole"
-    },
-    {
-        "name": "CSharpRefSample (console)",
-        "type": "coreclr",
-        "request": "launch",
-        "preLaunchTask": "build",
-        "program": "${workspaceFolder}/CSharpRefSample/bin/Debug/net6.0/CSharpRefSample.dll",
-        "args": [],
-        "cwd": "${workspaceFolder}/CSharpRefSample",
-        "stopAtEntry": false,
-        "console": "internalConsole"
-    },
-    {
-        "name": "CSharpWhimsicalWorkshop (console)",
-        "type": "coreclr",
-        "request": "launch",
-        "preLaunchTask": "build",
-        "program": "${workspaceFolder}/CSharpWhimsicalWorkshop/bin/Debug/net6.0/CSharpWhimsicalWorkshop.dll",
-        "args": [],
-        "cwd": "${workspaceFolder}/CSharpWhimsicalWorkshop",
-        "stopAtEntry": false,
-        "console": "internalConsole"
-    }
+        {
+            "name": "CSharpAlgorithmSample (console)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/CSharpAlgorithmSample/bin/Debug/net6.0/CSharpAlgorithmSample.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/CSharpAlgorithmSample",
+            "stopAtEntry": false,
+            "console": "internalConsole"
+        },
+        {
+            "name": "CSharpDapperAndSQLSample (console)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/CSharpDapperAndSQLSample/bin/Debug/net8.0/CSharpDapperAndSQLSample.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/CSharpDapperAndSQLSample",
+            "stopAtEntry": false,
+            "console": "internalConsole"
+        },
+        {
+            "name": "CSharpDuplicateObjectsSample (console)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/CSharpDuplicateObjectsSample/bin/Debug/net6.0/CSharpDuplicateObjectsSample.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/CSharpDuplicateObjectsSample",
+            "stopAtEntry": false,
+            "console": "internalConsole"
+        },
+        {
+            "name": "CSharpRefSample (console)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/CSharpRefSample/bin/Debug/net6.0/CSharpRefSample.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/CSharpRefSample",
+            "stopAtEntry": false,
+            "console": "internalConsole"
+        },
+        {
+            "name": "CSharpWhimsicalWorkshop (console)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/CSharpWhimsicalWorkshop/bin/Debug/net6.0/CSharpWhimsicalWorkshop.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/CSharpWhimsicalWorkshop",
+            "stopAtEntry": false,
+            "console": "internalConsole"
+        }
     ]
-
 }
