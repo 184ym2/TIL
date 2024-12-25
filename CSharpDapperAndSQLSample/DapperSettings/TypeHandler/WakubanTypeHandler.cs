@@ -1,13 +1,12 @@
+using CSharpDapperAndSQLSample.Model;
 using Dapper;
 using System.Data;
-using System.Text.RegularExpressions;
-using Microsoft.Data.Sqlite;
 
-namespace CSharpDapperAndSQLSample;
+namespace CSharpDapperAndSQLSample.DapperSettings.TypeHandler;
 
 // DatabaseとCustom型のマッピング
 
-// https://learn.microsoft.com/ja-jp/dotnet/standard/data/sqlite/dapper-limitations
+// https://learn.microsoft.com/ja-jp/dotnet/standard/data/sqlite/dapper-limitations#data-types
 
 /*
     Dapper では、SqliteDataReader インデクサーを使用して値が読み取られます。 
@@ -22,19 +21,36 @@ namespace CSharpDapperAndSQLSample;
 /// </summary>
 public class WakubanTypeHandler : SqlMapper.TypeHandler<Wakuban>
 {
+    /// <summary>
+    /// カスタム型をdapperの型に変換します。
+    /// </summary>
+    /// <param name="parameter">パラメータのDbType</param>
+    /// <param name="value">設定する値</param>
     public override void SetValue(IDbDataParameter parameter, Wakuban value)
     {
-        parameter.DbType = DbType.String;
+        parameter.DbType = DbType.Int64;
         parameter.Value = value.Value;
     }
 
+    /// <summary>
+    /// dapperの型をカスタム型に変換します。
+    /// </summary>
+    /// <param name="value">データベースから取得した値</param>
+    /// <returns><see cref="Wakuban"/>が戻ります。</returns>
     public override Wakuban Parse(object value)
     {
-        if (value is string stringValue)
+        if (value is int intValue)
         {
-            return new Wakuban(stringValue);
+            return new Wakuban(intValue);
         }
-        throw new ArgumentException($"枠番に変換できない値です: {value}");
+        else if (value is long longValue)
+        {
+            return new Wakuban((int)longValue);
+        }
+        else
+        {
+            throw new ArgumentException("対応していない型です。");
+        }
     }
 }
 

@@ -1,47 +1,42 @@
-using Dapper;
-using System.Data;
-using System.Text.RegularExpressions;
-using Microsoft.Data.Sqlite;
+namespace CSharpDapperAndSQLSample.Model;
 
-namespace CSharpDapperAndSQLSample;
-
-// DatabaseとCustom型のマッピング
-
-// 枠番のオブジェクト
+/// <summary>
+/// 枠番
+/// </summary>
 public record struct Wakuban
 {
     /// <summary>
-    /// 馬番のパターン  
-    /// </summary>
-    public static readonly string Pattern = @"[1-9]";
-
-    /// <summary>
     /// 馬番の値
     /// </summary>
-    public readonly string Value;
+    public readonly int Value;
+
+    /// <summary>
+    /// 内枠かどうか
+    /// </summary>
+    public readonly bool IsInnerFrame;
+
+    /// <summary>
+    /// 枠番の色
+    /// </summary>
+    public WakubanColor Color;
 
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    /// <param name="value">文字列</param>
-    public Wakuban(string value)
+    /// <param name="value">数値</param>
+    public Wakuban(int value)
     {
-        if (Regex.IsMatch(value, Pattern))
-        {
-            this.Value = value;
-        }
-        else
-        {
-            throw new ArgumentException($"枠番の値が不正です。{value}");
-        }
+        Value = value;
+        IsInnerFrame = value <= 4;
+        Color = (WakubanColor)value;
     }
 
     /// <summary>
-    /// 文字列を枠番に変換します。
+    /// 枠番に変換します。
     /// </summary>
-    /// <param name="value">変換対象の文字列</param>
+    /// <param name="value">変換対象の数値</param>
     /// <returns>枠番</returns>
-    public static Wakuban Parse(string value)
+    public static Wakuban Parse(int value)
     {
         return new Wakuban(value);
     }

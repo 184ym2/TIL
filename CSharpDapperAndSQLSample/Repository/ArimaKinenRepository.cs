@@ -1,8 +1,9 @@
 using Dapper;
 using System.Data;
 using Microsoft.Data.Sqlite;
+using CSharpDapperAndSQLSample.Model.DTO.Jp;
 
-namespace CSharpDapperAndSQLSample;
+namespace CSharpDapperAndSQLSample.Repository;
 
 public class ArimaKinenRepository
 {
@@ -38,13 +39,14 @@ public class ArimaKinenRepository
     /// </summary>
     private static void QueryMultipleRows(SqliteConnection connection)
     {
-        var sql = @"SELECT * FROM arima_kinen;";
-        var rows = connection.Query<ArimaKinenDTO>(sql);
+        const string SELECT_SQL = @"SELECT * FROM arima_kinen;";
+        var rows = connection.Query<ArimaKinenDTO>(SELECT_SQL);
 
         Console.WriteLine("\r\n複数行を取得し、全てのレコードを返します。");
+
         foreach (var row in rows)
         {
-            Console.WriteLine($"{row.Wakuban} {row.Umaban} {row.Bamei} {row.Seibetu}{row.Barei} {row.Kinryo} {row.Kisyu} {row.Kyusya}");
+            Console.WriteLine($"{row.Wakuban} {row.Umaban} {row.Bamei} {row.Seibetu}{row.Barei} {row.Kinryo} {row.Kisyu} {row.Kyusya} {row.CreateDate} {row.UpdateDate}");
         }
     }
 
@@ -54,8 +56,9 @@ public class ArimaKinenRepository
     private static void QuerySingleRow(SqliteConnection connection)
     {
         // QuerySingleOrDefault(QuerySingle)の場合、複数行を取得するSELECT文を投げるとエラーになります。必ず単一行を返すSELECT文を作成してください。
-        var sql = @"SELECT * FROM arima_kinen WHERE umaban = 8;";
-        var singleRow = connection.QuerySingleOrDefault<ArimaKinenDTO>(sql);
+        const string SELECT_SQL = @"SELECT * FROM arima_kinen WHERE umaban = 8;";
+        var singleRow = connection.QuerySingleOrDefault<ArimaKinenDTO>(SELECT_SQL);
+
         Console.WriteLine("\r\n1行を取得し、1行目のレコードを返します。");
 
         // 1行を取得する場合、取得したデータがnullかどうかをチェックして処理を分岐することがある
@@ -65,7 +68,7 @@ public class ArimaKinenRepository
         }
         else
         {
-            Console.WriteLine($"{singleRow.Wakuban} {singleRow.Umaban} {singleRow.Bamei} {singleRow.Seibetu}{singleRow.Barei} {singleRow.Kinryo} {singleRow.Kisyu} {singleRow.Kyusya}");
+            Console.WriteLine($"{singleRow.Wakuban} {singleRow.Umaban} {singleRow.Bamei} {singleRow.Seibetu}{singleRow.Barei} {singleRow.Kinryo} {singleRow.Kisyu} {singleRow.Kyusya} {singleRow.CreateDate} {singleRow.UpdateDate}");
         }
     }
 
@@ -74,8 +77,9 @@ public class ArimaKinenRepository
     /// </summary>
     private static void QueryFirstRow(SqliteConnection connection)
     {
-        var sql = @"SELECT * FROM arima_kinen;";
-        var firstRow = connection.QueryFirstOrDefault<ArimaKinenDTO>(sql);
+        const string SELECT_SQL = @"SELECT * FROM arima_kinen;";
+        var firstRow = connection.QueryFirstOrDefault<ArimaKinenDTO>(SELECT_SQL);
+
         Console.WriteLine("\r\n複数行を取得し、1行目のレコードを返します。");
 
         // 1行を取得する場合、取得したデータがnullかどうかをチェックして処理を分岐することがある
@@ -85,7 +89,7 @@ public class ArimaKinenRepository
         }
         else
         {
-            Console.WriteLine($"{firstRow.Wakuban} {firstRow.Umaban} {firstRow.Bamei} {firstRow.Seibetu}{firstRow.Barei} {firstRow.Kinryo} {firstRow.Kisyu} {firstRow.Kyusya}");
+            Console.WriteLine($"{firstRow.Wakuban} {firstRow.Umaban} {firstRow.Bamei} {firstRow.Seibetu}{firstRow.Barei} {firstRow.Kinryo} {firstRow.Kisyu} {firstRow.Kyusya} {firstRow.CreateDate} {firstRow.UpdateDate}");
         }
     }
 
@@ -94,14 +98,14 @@ public class ArimaKinenRepository
     /// </summary>
     private static void QueryMultipleSelects(SqliteConnection connection)
     {
-        var sql = @"
+        const string SELECT_SQL = @"
             SELECT * FROM arima_kinen;
             SELECT * FROM arima_kinen WHERE umaban = 13;
             SELECT COUNT(*) FROM arima_kinen;
             ";
 
         // SELECT文をまとめて実行します。
-        var multi = connection.QueryMultiple(sql);
+        var multi = connection.QueryMultiple(SELECT_SQL);
 
         // 戻り値の型を指定して1番目のSELECT文の取得結果を受け取ります。
         var allRows = multi.Read<ArimaKinenDTO>();
@@ -113,12 +117,13 @@ public class ArimaKinenRepository
         var count = multi.ReadFirstOrDefault<int>();
 
         Console.WriteLine("\r\n複数のクエリを実行します。");
+
         foreach (var row in allRows)
         {
-            Console.WriteLine($"{row.Wakuban} {row.Umaban} {row.Bamei} {row.Seibetu}{row.Barei} {row.Kinryo} {row.Kisyu} {row.Kyusya}");
+            Console.WriteLine($"{row.Wakuban} {row.Umaban} {row.Bamei} {row.Seibetu}{row.Barei} {row.Kinryo} {row.Kisyu} {row.Kyusya} {row.CreateDate} {row.UpdateDate}");
         }
 
-        Console.WriteLine($"\r\n{firstReadRow?.Wakuban} {firstReadRow?.Umaban} {firstReadRow?.Bamei} {firstReadRow?.Seibetu}{firstReadRow?.Barei} {firstReadRow?.Kinryo} {firstReadRow?.Kisyu} {firstReadRow?.Kyusya}");
+        Console.WriteLine($"\r\n{firstReadRow?.Wakuban} {firstReadRow?.Umaban} {firstReadRow?.Bamei} {firstReadRow?.Seibetu}{firstReadRow?.Barei} {firstReadRow?.Kinryo} {firstReadRow?.Kisyu} {firstReadRow?.Kyusya} {firstReadRow?.CreateDate} {firstReadRow?.UpdateDate}");
 
         Console.WriteLine($"\r\n2022年の有馬記念は計{count}頭が出走しました。");
     }
@@ -128,25 +133,27 @@ public class ArimaKinenRepository
     /// </summary>
     private static void QueryWithSingleParameter(SqliteConnection connection)
     {
-        var sql = @"SELECT * FROM arima_kinen WHERE umaban = @umaban;";
+        const string SELECT_SQL = @"SELECT * FROM arima_kinen WHERE umaban = @umaban;";
 
         // 匿名パラメーター(Anonymous Parameter)の場合
         // new {[カラム名] = [値]} でパラメーターを作成します。
         var param1 = 3;
-        var apResult = connection.QueryFirstOrDefault<ArimaKinenDTO>(sql, new { umaban = param1 });
+        var apResult = connection.QueryFirstOrDefault<ArimaKinenDTO>(SELECT_SQL, new { umaban = param1 });
 
         Console.WriteLine("\r\n馬番が3の馬を返します。");
-        Console.WriteLine($"{apResult?.Wakuban} {apResult?.Umaban} {apResult?.Bamei} {apResult?.Seibetu}{apResult?.Barei} {apResult?.Kinryo} {apResult?.Kisyu} {apResult?.Kyusya}");
+        Console.WriteLine($"{apResult?.Wakuban} {apResult?.Umaban} {apResult?.Bamei} {apResult?.Seibetu}{apResult?.Barei} {apResult?.Kinryo} {apResult?.Kisyu} {apResult?.Kyusya} {apResult?.CreateDate} {apResult?.UpdateDate}");
 
         // 動的パラメーター(Dynamic Parameters)の場合
         // Dynamic Parametersを作成し、Addメソッドでパラメーターを作成します。
         var parameters = new DynamicParameters();
+
         var param2 = "4";
-        parameters.Add("@umaban", param2, DbType.Int32); // 第3引数はパラメータの型を指定します。 
-        var dpResult = connection.QueryFirstOrDefault<ArimaKinenDTO>(sql, parameters);
+        parameters.Add("@umaban", param2, DbType.Int32); // 第3引数はパラメータの型を指定します。
+
+        var dpResult = connection.QueryFirstOrDefault<ArimaKinenDTO>(SELECT_SQL, parameters);
 
         Console.WriteLine("\r\n馬番が4の馬を返します。");
-        Console.WriteLine($"{dpResult?.Wakuban} {dpResult?.Umaban} {dpResult?.Bamei} {dpResult?.Seibetu}{dpResult?.Barei} {dpResult?.Kinryo} {dpResult?.Kisyu} {dpResult?.Kyusya}");
+        Console.WriteLine($"{dpResult?.Wakuban} {dpResult?.Umaban} {dpResult?.Bamei} {dpResult?.Seibetu}{dpResult?.Barei} {dpResult?.Kinryo} {dpResult?.Kisyu} {dpResult?.Kyusya} {dpResult?.CreateDate} {dpResult?.UpdateDate}");
     }
 
     /// <summary>
@@ -154,19 +161,19 @@ public class ArimaKinenRepository
     /// </summary>
     private static void QueryWithInClause(SqliteConnection connection)
     {
-        var sql = @"SELECT * FROM arima_kinen WHERE umaban in @umaban;";
+        const string SELECT_SQL = @"SELECT * FROM arima_kinen WHERE umaban in @umaban;";
 
         // in句に設定したい値で配列を作成します。new List<int> { 1, 5, 9 }; でもOK
         var numbers = new[] { 1, 5, 9 };
-        var numbersList = new List<int> { 1, 5, 9 };
 
-        // Anonymous Parameterで配列のパラメータを作成します。
-        var targetRows = connection.Query<ArimaKinenDTO>(sql, new { umaban = numbers });
+        // 匿名パラメーター(Anonymous Parameter)で配列のパラメータを作成します。
+        var targetRows = connection.Query<ArimaKinenDTO>(SELECT_SQL, new { umaban = numbers });
 
         Console.WriteLine("\r\n馬番が1,5,9の馬を返します。");
+
         foreach (var row in targetRows)
         {
-            Console.WriteLine($"{row.Wakuban} {row.Umaban} {row.Bamei} {row.Seibetu}{row.Barei} {row.Kinryo} {row.Kisyu} {row.Kyusya}");
+            Console.WriteLine($"{row.Wakuban} {row.Umaban} {row.Bamei} {row.Seibetu}{row.Barei} {row.Kinryo} {row.Kisyu} {row.Kyusya} {row.CreateDate} {row.UpdateDate}");
         }
     }
 
@@ -176,13 +183,15 @@ public class ArimaKinenRepository
     private static void ExecuteScalarQueries(SqliteConnection connection)
     {
         // COUNT
-        var countSql = @"SELECT COUNT(*) FROM arima_kinen";
-        var count = connection.ExecuteScalar(countSql);
+        const string COUNT_SQL = @"SELECT COUNT(*) FROM arima_kinen;";
+        var count = connection.ExecuteScalar(COUNT_SQL);
+
         Console.WriteLine($"\r\n2022年の有馬記念は計{count}頭が出走しました。");
 
         // SUM
-        var sumSql = @"SELECT SUM(barei) FROM arima_kinen";
-        var sum = connection.ExecuteScalar(sumSql);
+        const string SUM_SQL = @"SELECT SUM(barei) FROM arima_kinen;";
+        var sum = connection.ExecuteScalar(SUM_SQL);
+
         Console.WriteLine($"\r\n2022年の有馬記念出走馬の馬齢合計は{sum}です。");
     }
 

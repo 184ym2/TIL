@@ -1,9 +1,18 @@
-namespace CSharpDapperAndSQLSample;
+namespace CSharpDapperAndSQLSample.Model;
 
 /// <summary>
-/// 宝塚記念のデータを格納するクラス
+/// 宝塚記念
 /// </summary>
-public class TakarazukaKinen(int wakuban, int umaban, string bamei, string seibetu, int barei, int kinryo, string Kisyu, string kyusya)
+public class TakarazukaKinen(
+    int wakuban,
+    int umaban,
+    string bamei,
+    string seibetu,
+    int barei,
+    double kinryo,
+    string Kisyu,
+    string kyusya
+)
 {
     /// <summary>
     /// 枠番
@@ -33,7 +42,7 @@ public class TakarazukaKinen(int wakuban, int umaban, string bamei, string seibe
     /// <summary>
     /// 斤量
     /// </summary>
-    public int Kinryo { get; } = kinryo;
+    public double Kinryo { get; } = kinryo;
 
     /// <summary>
     /// 騎手

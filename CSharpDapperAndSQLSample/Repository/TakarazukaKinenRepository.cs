@@ -1,7 +1,8 @@
+using CSharpDapperAndSQLSample.Model;
 using Dapper;
 using Microsoft.Data.Sqlite;
 
-namespace CSharpDapperAndSQLSample;
+namespace CSharpDapperAndSQLSample.Repository;
 
 public class TakarazukaKinenRepository
 {
@@ -35,8 +36,7 @@ public class TakarazukaKinenRepository
     /// </summary>
     private static void InsertSingleRecord(SqliteConnection connection)
     {
-        // 追加
-        var insertSql = @"
+        const string INSERT_SQL = @"
             INSERT INTO takarazuka_kinen
             (
                 wakuban,
@@ -62,10 +62,10 @@ public class TakarazukaKinenRepository
                 @updatedate
             );";
 
-        // 匿名パラメーター(Anonymous Parameter) でパラメーターを作成します。
-        // ※takarazuka_kinenの馬番(umaban)は自動採番のため、パラメーターを使用しません。
-        var insertResult = connection.Execute(insertSql, new
+        var result = connection.Execute(INSERT_SQL, new
         {
+            // 匿名パラメーター(Anonymous Parameter) でパラメーターを作成します。
+            // ※takarazuka_kinenの馬番(umaban)は自動採番のため、パラメーターを使用しません。
             wakuban = "1",
             bamei = "ライラック",
             seibetu = "牝",
@@ -77,7 +77,7 @@ public class TakarazukaKinenRepository
             updatedate = DateTime.Now,
         });
 
-        Console.WriteLine($"\r\n{insertResult}件追加しました。");
+        Console.WriteLine($"\r\n{result}件追加しました。");
     }
 
     /// <summary>
@@ -85,29 +85,36 @@ public class TakarazukaKinenRepository
     /// </summary>
     private static void UpdateAndDeleteSingleRecord(SqliteConnection connection)
     {
-        var targetNo = 1;
+        const int TARGET_NUMBER = 1;
 
-        // 更新
-        var updateSql = @"UPDATE takarazuka_kinen SET barei = 5 WHERE umaban = @umaban";
-        // 匿名パラメーター(Anonymous Parameter) でパラメーターを作成します。
-        var updateResult = connection.Execute(updateSql, new { umaban = targetNo });
+        const string UPDATE_SQL = @"UPDATE takarazuka_kinen SET barei = 5, updatedate = @updatedate WHERE umaban = @umaban;";
+
+        var updateResult = connection.Execute(UPDATE_SQL, new
+        {
+            // 匿名パラメーター(Anonymous Parameter) でパラメーターを作成します。  
+            updatedate = DateTime.Now,
+            umaban = TARGET_NUMBER
+        });
+
         Console.WriteLine($"\r\n{updateResult}件更新しました。");
 
-        // 削除
-        var deleteSql = @"DELETE FROM takarazuka_kinen WHERE umaban = @umaban";
-        // 匿名パラメーター(Anonymous Parameter) でパラメーターを作成します。
-        var deleteResult = connection.Execute(deleteSql, new { umaban = targetNo });
+        const string DELETE_SQL = @"DELETE FROM takarazuka_kinen WHERE umaban = @umaban;";
+
+        var deleteResult = connection.Execute(DELETE_SQL, new
+        {
+            // 匿名パラメーター(Anonymous Parameter) でパラメーターを作成します。  
+            umaban = TARGET_NUMBER
+        });
+
         Console.WriteLine($"\r\n{deleteResult}件削除しました。");
     }
-
-
 
     /// <summary>
     /// 複数レコードの挿入
     /// </summary>
     private static void InsertMultipleRecords(SqliteConnection connection)
     {
-        var insertSql = @"
+        const string INSERT_SQL = @"
             INSERT INTO takarazuka_kinen
             (
                 wakuban,
@@ -133,7 +140,6 @@ public class TakarazukaKinenRepository
                 @updatedate
             );";
 
-        // 複数のINSERT
         // パラメーター用のリストをTakarazukaKinenクラスを使用して作成します。
         var addList = new List<TakarazukaKinen>
         {
@@ -156,7 +162,7 @@ public class TakarazukaKinenRepository
             new(8, 17, "ドゥラエレーデ", "牡", 3, 53, "幸", "池添")
         };
 
-        // パラメーター用のリストをDapperに渡すための匿名パラメーター(Anonymous Parameter) に変換します。
+        // パラメーター用のリストを匿名パラメーター(Anonymous Parameter) に変換します。
         // ※takarazuka_kinenの馬番(umaban)は自動採番のため、パラメーターを使用しません。
         var multiInsertParams = addList.Select(x => new
         {
@@ -171,12 +177,12 @@ public class TakarazukaKinenRepository
             updatedate = DateTime.Now
         });
 
-        // 17件のINSERTを実行します。
-        var multiInsertResult = connection.Execute(insertSql, multiInsertParams);
-        Console.WriteLine($"\r\n{multiInsertResult}件追加しました。");
+        var result = connection.Execute(INSERT_SQL, multiInsertParams);
+        Console.WriteLine($"\r\n{result}件追加しました。");
 
         /*
-        匿名パラメーター(Anonymous Parameter) を先に作成するのではなく、追加したいデータを foreach で回す方法もあります。
+        匿名パラメーター(Anonymous Parameter) を先にまとめて作成してExecuteを実行するのではなく、
+        追加したいデータを foreach で回しながら匿名パラメーター(Anonymous Parameter) を作成し、Executeを実行する方法もあります。
 
         foreach (var item in addList)
         {
@@ -204,37 +210,38 @@ public class TakarazukaKinenRepository
     /// </summary>
     private static void UpdateMultipleRecords(SqliteConnection connection)
     {
-        // 複数のUPDATE: その1
-        var multiUpdateSql = @"
+        const string UPDATE_SQL_1 = @"
             UPDATE takarazuka_kinen 
             SET updatedate = @updatedate
             WHERE umaban = @umaban;";
 
         var updateDate = DateTime.Now;
 
-        // Dapperに渡すための匿名パラメーター(Anonymous Parameter) を作成します。        
+        // 匿名パラメーター(Anonymous Parameter) でパラメーターを作成します。        
         var multiUpdateParams = Enumerable.Range(1, 17).Select(index => new
         {
             umaban = index,
             updatedate = updateDate
         }).ToList();
 
-        // 17件のUPDATEを実行します。
-        var multiUpdateResult = connection.Execute(multiUpdateSql, multiUpdateParams);
+        var multiUpdateResult = connection.Execute(UPDATE_SQL_1, multiUpdateParams);
         Console.WriteLine($"\r\n{multiUpdateResult}件更新しました。");
 
-        // 複数のUPDATE: その2
-        var multiUpdateSql2 = @"
+        const string UPDATE_SQL_2 = @"
             UPDATE takarazuka_kinen 
             SET updatedate = @updatedate
-            WHERE umaban IN @umabanList";
+            WHERE umaban IN @umabanList;";
 
         // 馬番のIN句に展開するためのリスト
         var umabanList = Enumerable.Range(1, 17).ToList();
 
-        // パラメーター名と変数名が同じため「umabanList = umabanList」はイコールを省略できます
-        var multiUpdateParams2 = new { updatedate = updateDate, umabanList };
-        var multiUpdateResult2 = connection.Execute(multiUpdateSql2, multiUpdateParams2);
+        var multiUpdateResult2 = connection.Execute(UPDATE_SQL_2, new
+        {
+            // 匿名パラメーター(Anonymous Parameter) でパラメーターを作成します。
+            // パラメーター名と変数名が同じため「umabanList = umabanList」はイコールを省略できます。
+            updatedate = updateDate,
+            umabanList
+        });
         Console.WriteLine($"\r\n{multiUpdateResult2}件更新しました。");
     }
 
@@ -244,9 +251,10 @@ public class TakarazukaKinenRepository
     private static void DeleteAllRecords(SqliteConnection connection)
     {
         // テスト用データベースのデータを全て削除
-        var deleteSql2 = @"DELETE FROM takarazuka_kinen";
-        var deleteResult2 = connection.Execute(deleteSql2);
-        Console.WriteLine($"\r\n{deleteResult2}件削除しました。");
+        const string DELETE_SQL = @"DELETE FROM takarazuka_kinen;";
+
+        var result = connection.Execute(DELETE_SQL);
+        Console.WriteLine($"\r\n{result}件削除しました。");
     }
 
 }

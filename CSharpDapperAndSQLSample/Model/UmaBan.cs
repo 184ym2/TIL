@@ -1,49 +1,39 @@
-using Dapper;
-using System.Data;
-using System.Text.RegularExpressions;
-using Microsoft.Data.Sqlite;
+namespace CSharpDapperAndSQLSample.Model;
 
-namespace CSharpDapperAndSQLSample;
-
-// DatabaseとCustom型のマッピング
-
-// 馬番のオブジェクト
-public record struct UmaBan
+/// <summary>
+/// 馬番
+/// </summary>
+public record struct Umaban
 {
-    /// <summary>
-    /// 馬番のパターン  
-    /// </summary>
-    public static readonly string Pattern = @"[1-9]";
-
     /// <summary>
     /// 馬番の値
     /// </summary>
-    public readonly string Value;
+    public readonly int Value;
+
+    /// <summary>
+    /// 先入れかどうかを示す値 <br />
+    /// 奇数番の馬から先にゲートに入ります。
+    /// </summary>
+    public readonly bool IsFirstInserted;
 
     /// <summary>
     /// コンストラクタ
     /// </summary>
-    /// <param name="value">文字列</param>
-    public UmaBan(string value)
+    /// <param name="value">数値</param>
+    public Umaban(int value)
     {
-        if (Regex.IsMatch(value, Pattern))
-        {
-            this.Value = value;
-        }
-        else
-        {
-            throw new ArgumentException($"馬番の値が不正です。{value}");
-        }
+        Value = value;
+        IsFirstInserted = value % 2 != 0;
     }
 
     /// <summary>
-    /// 文字列を馬番に変換します。
+    /// 馬番に変換します。
     /// </summary>
-    /// <param name="value">変換対象の文字列</param>
+    /// <param name="value">変換対象の数値</param>
     /// <returns>馬番</returns>
-    public static UmaBan Parse(string value)
+    public static Umaban Parse(int value)
     {
-        return new UmaBan(value);
+        return new Umaban(value);
     }
 }
 

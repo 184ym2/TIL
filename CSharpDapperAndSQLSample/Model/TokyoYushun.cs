@@ -1,9 +1,19 @@
-namespace CSharpDapperAndSQLSample;
+namespace CSharpDapperAndSQLSample.Model;
 
 /// <summary>
-/// 東京優駿（日本ダービー）のデータを格納するクラス
+/// 東京優駿（日本ダービー）
 /// </summary>
-public class TokyoYushun(int Kaisu, Wakuban wakuban, UmaBan umaban, string bamei, string seibetu, int barei, int kinryo, string Kisyu, string kyusya)
+public class TokyoYushun(
+    int Kaisu, 
+    Wakuban wakuban, 
+    Umaban umaban, 
+    string bamei, 
+    string seibetu, 
+    int barei, 
+    double kinryo, 
+    string Kisyu, 
+    string kyusya
+)
 {
     /// <summary>
     /// 回数
@@ -18,7 +28,7 @@ public class TokyoYushun(int Kaisu, Wakuban wakuban, UmaBan umaban, string bamei
     /// <summary>
     /// 馬番
     /// </summary>
-    public UmaBan Umaban { get; } = umaban;
+    public Umaban Umaban { get; } = umaban;
 
     /// <summary>
     /// 馬名
@@ -38,7 +48,7 @@ public class TokyoYushun(int Kaisu, Wakuban wakuban, UmaBan umaban, string bamei
     /// <summary>
     /// 斤量
     /// </summary>
-    public int Kinryo { get; } = kinryo;
+    public double Kinryo { get; } = kinryo;
 
     /// <summary>
     /// 騎手
