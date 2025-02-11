@@ -8,55 +8,55 @@ public class DubaiSheemaClassicDTO()
     /// <summary>
     /// 回数
     /// </summary>
-    public int Time { get; set; }
+    public int? Time { get; set; }
 
     /// <summary>
     /// 枠番(ゲート番)
     /// </summary>
-    public Wakuban BracketNumber { get; set; }
+    public Wakuban? BracketNumber { get; set; }
 
     /// <summary>
     /// 馬番
     /// </summary>
-    public Umaban HorseNumber { get; set; }
+    public Umaban? HorseNumber { get; set; }
 
     /// <summary>
     /// 馬名
     /// </summary>
-    public string HorseName { get; set; }
+    public string? HorseName { get; set; }
 
     /// <summary>
     /// 性別
     /// </summary>
-    public string Sex { get; set; }
+    public string? Sex { get; set; }
 
     /// <summary>
     /// 馬齢
     /// </summary>
-    public int Age { get; set; }
+    public int? Age { get; set; }
 
     /// <summary>
     /// 斤量
     /// </summary>
-    public double Weight { get; set; }
+    public double? Weight { get; set; }
 
     /// <summary>
     /// 騎手
     /// </summary>
-    public string Jockey { get; set; }
+    public string? Jockey { get; set; }
 
     /// <summary>
     /// 厩舎
     /// </summary>
-    public string Trainer { get; set; }
+    public string? Trainer { get; set; }
 
     /// <summary>
     /// 作成日付
     /// </summary>
-    public string CreateDate { get; set; }
+    public string? CreateDate { get; set; }
 
     /// <summary>
     /// 更新日付
     /// </summary>
-    public string UpdateDate { get; set; }
+    public string? UpdateDate { get; set; }
 }

@@ -1,6 +1,4 @@
-﻿using Dapper;
-using CSharpDapperAndSQLSample.Repository;
-using CSharpDapperAndSQLSample.Model;
+﻿using CSharpDapperAndSQLSample.Repository;
 using CSharpDapperAndSQLSample.DapperSettings.TypeHandler;
 using CSharpDapperAndSQLSample.DapperSettings.SetTypeMap;
 
@@ -22,12 +20,11 @@ class Program
         // カスタムマッピングの設定
         CustomPropertyMapper.ConfigureDubaiSheemaClassicMappings();
 
-
         // 型ハンドラーを使用した取得、追加
         TokyoYushunRepository.Execute();
  
         // 型ハンドラー + カスタムマッピングを使用した取得、追加
-        //DubaiSheemaClassicRepository.Execute();
+        DubaiSheemaClassicRepository.Execute();
     }
 
 }

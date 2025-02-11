@@ -39,6 +39,14 @@ public class WakubanTypeHandler : SqlMapper.TypeHandler<Wakuban>
     /// <returns><see cref="Wakuban"/>が戻ります。</returns>
     public override Wakuban Parse(object value)
     {
+        /*
+            下記は型変換できない場合を考慮していますが、
+            適切なDB設計を行うことで、例外処理は不要になります。
+
+            例）
+            public override Wakuban Parse(object value)　=> new Umaban((int)value);
+        */
+
         if (value is int intValue)
         {
             return new Wakuban(intValue);
@@ -49,7 +57,7 @@ public class WakubanTypeHandler : SqlMapper.TypeHandler<Wakuban>
         }
         else
         {
-            throw new ArgumentException("対応していない型です。");
+            throw new ArgumentException($"対応していない型です: {value?.GetType().FullName}");
         }
     }
 }

@@ -181,27 +181,26 @@ public class TakarazukaKinenRepository
         Console.WriteLine($"\r\n{result}件追加しました。");
 
         /*
-        匿名パラメーター(Anonymous Parameter) を先にまとめて作成してExecuteを実行するのではなく、
-        追加したいデータを foreach で回しながら匿名パラメーター(Anonymous Parameter) を作成し、Executeを実行する方法もあります。
+            匿名パラメーター(Anonymous Parameter) を先にまとめて作成してExecuteを実行するのではなく、
+            追加したいデータを foreach で回しながら匿名パラメーター(Anonymous Parameter) を作成し、Executeを実行する方法もあります。
 
-        foreach (var item in addList)
-        {
-            var multiInsertResult = connection.Execute(insertSql, new
+            foreach (var item in addList)
             {
-                wakuban = x.Wakuban,
-                bamei = x.Bamei,
-                seibetu = x.Seibetu,
-                barei = x.Barei,
-                kinryo = x.Kinryo,
-                kisyu = x.Kisyu,
-                kyusya = x.Kyusya,
-                createdate = DateTime.Now,
-                updatedate = DateTime.Now
-            });
+                var multiInsertResult = connection.Execute(insertSql, new
+                {
+                    wakuban = x.Wakuban,
+                    bamei = x.Bamei,
+                    seibetu = x.Seibetu,
+                    barei = x.Barei,
+                    kinryo = x.Kinryo,
+                    kisyu = x.Kisyu,
+                    kyusya = x.Kyusya,
+                    createdate = DateTime.Now,
+                    updatedate = DateTime.Now
+                });
 
-            Console.WriteLine($"\r\n{multiInsertResult}件追加しました。");
-        }   
-
+                Console.WriteLine($"\r\n{multiInsertResult}件追加しました。");
+            }
         */
     }
 

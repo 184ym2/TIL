@@ -43,7 +43,7 @@ public class DubaiSheemaClassicRepository
         Console.WriteLine("\r\n複数行を取得し、全てのレコードを返します。");
         foreach (var row in rows)
         {
-            Console.WriteLine($"第{row.Time}回 {row.BracketNumber} {row.HorseNumber} {row.HorseName} {row.Sex}{row.Age} {row.Weight} {row.Jockey} {row.Trainer}");
+            Console.WriteLine($"第{row.Time}回 {row.BracketNumber} {row.HorseNumber} {row.HorseName} {row.Sex}{row.Age} {row.Weight} {row.Jockey} {row.Trainer} {row.CreateDate} {row.UpdateDate}");
         }
     }
 
@@ -56,7 +56,7 @@ public class DubaiSheemaClassicRepository
             INSERT INTO dubai_sheema_classic
             (
                 kaisu,
-                gateban,
+                wakuban,
                 umaban,
                 bamei,
                 seibetu,
@@ -70,7 +70,7 @@ public class DubaiSheemaClassicRepository
             VALUES
             (
                 @kaisu,
-                @gateban,
+                @wakuban,
                 @umaban,
                 @bamei,
                 @seibetu,
@@ -103,7 +103,7 @@ public class DubaiSheemaClassicRepository
         var multiInsertParams = addList.Select(x => new
         {
             kaisu = x.Time,
-            gateban = x.BracketNumber, // Wakuban は独自クラスだが、パラメーターとして使用できる
+            wakuban = x.BracketNumber, // Wakuban は独自クラスだが、パラメーターとして使用できる
             umaban = x.HorseNumber, // UmaBan は独自クラスだが、パラメーターとして使用できる
             bamei = x.HorseName,
             seibetu = x.Sex,
@@ -119,8 +119,8 @@ public class DubaiSheemaClassicRepository
         Console.WriteLine($"\r\n{insertResult}件追加しました。");
 
         /*
-        匿名パラメーター(Anonymous Parameter) を先にまとめて作成してExecuteを実行するのではなく、
-        追加したいデータを foreach で回しながら、匿名パラメーター(Anonymous Parameter) を作成してExecuteを実行する方法もあります。
+            匿名パラメーター(Anonymous Parameter) を先にまとめて作成してExecuteを実行するのではなく、
+            追加したいデータを foreach で回しながら、匿名パラメーター(Anonymous Parameter) を作成してExecuteを実行する方法もあります。
         */
     }
 

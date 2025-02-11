@@ -43,7 +43,7 @@ public class TokyoYushunRepository
         Console.WriteLine("\r\n複数行を取得し、全てのレコードを返します。");
         foreach (var row in rows)
         {
-            Console.WriteLine($"第{row.Kaisu}回 {row.Wakuban.Value} {row.Wakuban.Color} {row.Umaban.Value} {row.Bamei} {row.Seibetu}{row.Barei} {row.Kinryo} {row.Kisyu} {row.Kyusya} {row.CreateDate} {row.UpdateDate}");
+            Console.WriteLine($"第{row.Kaisu}回 {row.Wakuban!.Value} {row.Umaban!.Value} {row.Bamei} {row.Seibetu}{row.Barei} {row.Kinryo} {row.Kisyu} {row.Kyusya} {row.CreateDate} {row.UpdateDate}");
         }
     }
 
@@ -125,8 +125,8 @@ public class TokyoYushunRepository
         Console.WriteLine($"\r\n{insertResult}件追加しました。");
 
         /*
-        匿名パラメーター(Anonymous Parameter) を先にまとめて作成してExecuteを実行するのではなく、
-        追加したいデータを foreach で回しながら、匿名パラメーター(Anonymous Parameter) を作成してExecuteを実行する方法もあります。
+            匿名パラメーター(Anonymous Parameter) を先にまとめて作成してExecuteを実行するのではなく、
+            追加したいデータを foreach で回しながら、匿名パラメーター(Anonymous Parameter) を作成してExecuteを実行する方法もあります。
         */
     }
 

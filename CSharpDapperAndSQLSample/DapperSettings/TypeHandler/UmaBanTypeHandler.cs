@@ -39,6 +39,14 @@ public class UmabanTypeHandler : SqlMapper.TypeHandler<Umaban>
     /// <returns><see cref="Umaban"/>が戻ります。</returns>
     public override Umaban Parse(object value)
     {
+        /*
+            下記は型変換できない場合を考慮していますが、
+            適切なDB設計を行うことで、例外処理は不要になります。
+
+            例）
+            public override Umaban Parse(object value)　=> new Umaban((int)value);
+        */
+
         if (value is int intValue)
         {
             return new Umaban(intValue);
@@ -49,7 +57,7 @@ public class UmabanTypeHandler : SqlMapper.TypeHandler<Umaban>
         }
         else
         {
-            throw new ArgumentException("対応していない型です。");
+            throw new ArgumentException($"対応していない型です: {value?.GetType().FullName}");
         }
     }
 }

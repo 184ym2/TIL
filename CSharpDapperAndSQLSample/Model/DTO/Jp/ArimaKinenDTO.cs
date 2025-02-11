@@ -8,50 +8,50 @@ public class ArimaKinenDTO
     /// <summary>
     /// 枠番
     /// </summary>
-    public int Wakuban { get; set; }
+    public int? Wakuban { get; set; }
 
     /// <summary>
     /// 馬番
     /// </summary>
-    public int Umaban { get; set; }
+    public int? Umaban { get; set; }
 
     /// <summary>
     /// 馬名
     /// </summary>
-    public string Bamei { get; set; }
+    public string? Bamei { get; set; }
 
     /// <summary>
     /// 性別
     /// </summary>
-    public string Seibetu { get; set; }
+    public string? Seibetu { get; set; }
 
     /// <summary>
     /// 馬齢
     /// </summary>
-    public int Barei { get; set; }
+    public int? Barei { get; set; }
 
     /// <summary>
     /// 斤量
     /// </summary>
-    public double Kinryo { get; set; }
+    public double? Kinryo { get; set; }
 
     /// <summary>
     /// 騎手
     /// </summary>
-    public string Kisyu { get; set; }
+    public string? Kisyu { get; set; }
 
     /// <summary>
     /// 厩舎
     /// </summary>
-    public string Kyusya { get; set; }
+    public string? Kyusya { get; set; }
 
     /// <summary>
     /// 作成日付
     /// </summary>
-    public string CreateDate { get; set; }
+    public string? CreateDate { get; set; }
 
     /// <summary>
     /// 更新日付
     /// </summary>
-    public string UpdateDate { get; set; }
+    public string? UpdateDate { get; set; }
 }
