@@ -36,9 +36,9 @@ public class DubaiSheemaClassicRepository
     /// </summary>
     private static void GetAllDubaiSheemaClassicRecords(SqliteConnection connection)
     {
-        const string SELECT_SQL = @"SELECT * FROM dubai_sheema_classic WHERE kaisu = 25;";
+        const string SelectSql = @"SELECT * FROM dubai_sheema_classic WHERE kaisu = 25;";
 
-        var rows = connection.Query<DubaiSheemaClassicDTO>(SELECT_SQL);
+        var rows = connection.Query<DubaiSheemaClassicDTO>(SelectSql);
 
         Console.WriteLine("\r\n複数行を取得し、全てのレコードを返します。");
         foreach (var row in rows)
@@ -52,7 +52,7 @@ public class DubaiSheemaClassicRepository
     /// </summary>
     private static void AddDubaiSheemaClassicRecords(SqliteConnection connection)
     {
-        const string INSERT_SQL = @"
+        const string InsertSql = @"
             INSERT INTO dubai_sheema_classic
             (
                 kaisu,
@@ -115,7 +115,7 @@ public class DubaiSheemaClassicRepository
             updatedate = DateTime.Now
         });
 
-        var insertResult = connection.Execute(INSERT_SQL, multiInsertParams);
+        var insertResult = connection.Execute(InsertSql, multiInsertParams);
         Console.WriteLine($"\r\n{insertResult}件追加しました。");
 
         /*
@@ -129,9 +129,9 @@ public class DubaiSheemaClassicRepository
     /// </summary>
     private static void DeleteDubaiSheemaClassicRecords(SqliteConnection connection)
     {
-        const string DELETE_SQL = @"DELETE FROM dubai_sheema_classic WHERE kaisu = 26;";
+        const string DeleteSql = @"DELETE FROM dubai_sheema_classic WHERE kaisu = 26;";
 
-        var deleteResult = connection.Execute(DELETE_SQL);
+        var deleteResult = connection.Execute(DeleteSql);
         Console.WriteLine($"\r\n{deleteResult}件削除しました。");
     }
 }

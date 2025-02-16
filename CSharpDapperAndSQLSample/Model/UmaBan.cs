@@ -3,7 +3,7 @@ namespace CSharpDapperAndSQLSample.Model;
 /// <summary>
 /// 馬番
 /// </summary>
-public record struct Umaban
+public readonly record struct Umaban
 {
     /// <summary>
     /// 馬番の値

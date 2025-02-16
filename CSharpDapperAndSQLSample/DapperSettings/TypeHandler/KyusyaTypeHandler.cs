@@ -17,18 +17,18 @@ namespace CSharpDapperAndSQLSample.DapperSettings.TypeHandler;
 */
 
 /// <summary>
-/// Wakubanの型ハンドラー
+/// Kyusyaの型ハンドラー
 /// </summary>
-public class WakubanTypeHandler : SqlMapper.TypeHandler<Wakuban>
+public class KyusyaTypeHandler : SqlMapper.TypeHandler<Kyusya>
 {
     /// <summary>
     /// カスタム型をdapperの型に変換します。
     /// </summary>
     /// <param name="parameter">パラメータのDbType</param>
     /// <param name="value">設定する値</param>
-    public override void SetValue(IDbDataParameter parameter, Wakuban value)
+    public override void SetValue(IDbDataParameter parameter, Kyusya value)
     {
-        parameter.DbType = DbType.Int64;
+        parameter.DbType = DbType.String;
         parameter.Value = value.Value;
     }
 
@@ -36,24 +36,20 @@ public class WakubanTypeHandler : SqlMapper.TypeHandler<Wakuban>
     /// dapperの型をカスタム型に変換します。
     /// </summary>
     /// <param name="value">データベースから取得した値</param>
-    /// <returns><see cref="Wakuban"/>が戻ります。</returns>
-    public override Wakuban Parse(object value)
+    /// <returns><see cref="Kyusya"/>が戻ります。</returns>
+    public override Kyusya Parse(object value)
     {
         /*
             下記は型変換できない場合を考慮していますが、
             適切なDB設計を行うことで、例外処理は不要になります。
 
             例）
-            public override Wakuban Parse(object value)　=> Wakuban.Parse((int)value);
+            public override Kyusya Parse(object value)　=> Kyusya.Parse(value);
         */
 
-        if (value is int intValue)
+        if (value is string stringValue)
         {
-            return Wakuban.Parse(intValue);
-        }
-        else if (value is long longValue)
-        {
-            return Wakuban.Parse((int)longValue);
+            return Kyusya.Parse(stringValue);
         }
         else
         {

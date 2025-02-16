@@ -44,16 +44,16 @@ public class UmabanTypeHandler : SqlMapper.TypeHandler<Umaban>
             適切なDB設計を行うことで、例外処理は不要になります。
 
             例）
-            public override Umaban Parse(object value)　=> new Umaban((int)value);
+            public override Umaban Parse(object value)　=> Umaban.Parse((int)value);
         */
 
         if (value is int intValue)
         {
-            return new Umaban(intValue);
+            return Umaban.Parse(intValue);
         }
         else if (value is long longValue)
         {
-            return new Umaban((int)longValue);
+            return Umaban.Parse((int)longValue);
         }
         else
         {

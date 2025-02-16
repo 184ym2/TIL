@@ -36,7 +36,7 @@ public class TakarazukaKinenRepository
     /// </summary>
     private static void InsertSingleRecord(SqliteConnection connection)
     {
-        const string INSERT_SQL = @"
+        const string InsertSql = @"
             INSERT INTO takarazuka_kinen
             (
                 wakuban,
@@ -62,7 +62,7 @@ public class TakarazukaKinenRepository
                 @updatedate
             );";
 
-        var result = connection.Execute(INSERT_SQL, new
+        var result = connection.Execute(InsertSql, new
         {
             // 匿名パラメーター(Anonymous Parameter) でパラメーターを作成します。
             // ※takarazuka_kinenの馬番(umaban)は自動採番のため、パラメーターを使用しません。
@@ -85,25 +85,25 @@ public class TakarazukaKinenRepository
     /// </summary>
     private static void UpdateAndDeleteSingleRecord(SqliteConnection connection)
     {
-        const int TARGET_NUMBER = 1;
+        const int TargetNumber = 1;
 
-        const string UPDATE_SQL = @"UPDATE takarazuka_kinen SET barei = 5, updatedate = @updatedate WHERE umaban = @umaban;";
+        const string UpdateSql = @"UPDATE takarazuka_kinen SET barei = 5, updatedate = @updatedate WHERE umaban = @umaban;";
 
-        var updateResult = connection.Execute(UPDATE_SQL, new
+        var updateResult = connection.Execute(UpdateSql, new
         {
             // 匿名パラメーター(Anonymous Parameter) でパラメーターを作成します。  
             updatedate = DateTime.Now,
-            umaban = TARGET_NUMBER
+            umaban = TargetNumber
         });
 
         Console.WriteLine($"\r\n{updateResult}件更新しました。");
 
-        const string DELETE_SQL = @"DELETE FROM takarazuka_kinen WHERE umaban = @umaban;";
+        const string DeleteSql = @"DELETE FROM takarazuka_kinen WHERE umaban = @umaban;";
 
-        var deleteResult = connection.Execute(DELETE_SQL, new
+        var deleteResult = connection.Execute(DeleteSql, new
         {
             // 匿名パラメーター(Anonymous Parameter) でパラメーターを作成します。  
-            umaban = TARGET_NUMBER
+            umaban = TargetNumber
         });
 
         Console.WriteLine($"\r\n{deleteResult}件削除しました。");
@@ -114,7 +114,7 @@ public class TakarazukaKinenRepository
     /// </summary>
     private static void InsertMultipleRecords(SqliteConnection connection)
     {
-        const string INSERT_SQL = @"
+        const string InsertSql = @"
             INSERT INTO takarazuka_kinen
             (
                 wakuban,
@@ -177,7 +177,7 @@ public class TakarazukaKinenRepository
             updatedate = DateTime.Now
         });
 
-        var result = connection.Execute(INSERT_SQL, multiInsertParams);
+        var result = connection.Execute(InsertSql, multiInsertParams);
         Console.WriteLine($"\r\n{result}件追加しました。");
 
         /*
@@ -209,7 +209,7 @@ public class TakarazukaKinenRepository
     /// </summary>
     private static void UpdateMultipleRecords(SqliteConnection connection)
     {
-        const string UPDATE_SQL_1 = @"
+        const string UpdateSql1 = @"
             UPDATE takarazuka_kinen 
             SET updatedate = @updatedate
             WHERE umaban = @umaban;";
@@ -223,10 +223,10 @@ public class TakarazukaKinenRepository
             updatedate = updateDate
         }).ToList();
 
-        var multiUpdateResult = connection.Execute(UPDATE_SQL_1, multiUpdateParams);
+        var multiUpdateResult = connection.Execute(UpdateSql1, multiUpdateParams);
         Console.WriteLine($"\r\n{multiUpdateResult}件更新しました。");
 
-        const string UPDATE_SQL_2 = @"
+        const string UpdateSql2 = @"
             UPDATE takarazuka_kinen 
             SET updatedate = @updatedate
             WHERE umaban IN @umabanList;";
@@ -234,7 +234,7 @@ public class TakarazukaKinenRepository
         // 馬番のIN句に展開するためのリスト
         var umabanList = Enumerable.Range(1, 17).ToList();
 
-        var multiUpdateResult2 = connection.Execute(UPDATE_SQL_2, new
+        var multiUpdateResult2 = connection.Execute(UpdateSql2, new
         {
             // 匿名パラメーター(Anonymous Parameter) でパラメーターを作成します。
             // パラメーター名と変数名が同じため「umabanList = umabanList」はイコールを省略できます。
@@ -250,9 +250,9 @@ public class TakarazukaKinenRepository
     private static void DeleteAllRecords(SqliteConnection connection)
     {
         // テスト用データベースのデータを全て削除
-        const string DELETE_SQL = @"DELETE FROM takarazuka_kinen;";
+        const string DeleteSql = @"DELETE FROM takarazuka_kinen;";
 
-        var result = connection.Execute(DELETE_SQL);
+        var result = connection.Execute(DeleteSql);
         Console.WriteLine($"\r\n{result}件削除しました。");
     }
 

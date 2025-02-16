@@ -17,5 +17,8 @@ public class TypeHandlerSettings
 
         // Wakubanの型ハンドラーを追加
         SqlMapper.AddTypeHandler(new WakubanTypeHandler());
+
+        // Kyusyaの型ハンドラーを追加
+        SqlMapper.AddTypeHandler(new KyusyaTypeHandler());
     }
 }

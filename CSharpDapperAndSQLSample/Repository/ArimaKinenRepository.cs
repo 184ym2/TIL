@@ -39,8 +39,8 @@ public class ArimaKinenRepository
     /// </summary>
     private static void QueryMultipleRows(SqliteConnection connection)
     {
-        const string SELECT_SQL = @"SELECT * FROM arima_kinen;";
-        var rows = connection.Query<ArimaKinenDTO>(SELECT_SQL);
+        const string SelectSql = @"SELECT * FROM arima_kinen;";
+        var rows = connection.Query<ArimaKinenDTO>(SelectSql);
 
         Console.WriteLine("\r\n複数行を取得し、全てのレコードを返します。");
 
@@ -56,8 +56,8 @@ public class ArimaKinenRepository
     private static void QuerySingleRow(SqliteConnection connection)
     {
         // QuerySingleOrDefault(QuerySingle)の場合、複数行を取得するSELECT文を投げるとエラーになります。必ず単一行を返すSELECT文を作成してください。
-        const string SELECT_SQL = @"SELECT * FROM arima_kinen WHERE umaban = 8;";
-        var singleRow = connection.QuerySingleOrDefault<ArimaKinenDTO>(SELECT_SQL);
+        const string SelectSql = @"SELECT * FROM arima_kinen WHERE umaban = 8;";
+        var singleRow = connection.QuerySingleOrDefault<ArimaKinenDTO>(SelectSql);
 
         Console.WriteLine("\r\n1行を取得し、1行目のレコードを返します。");
 
@@ -133,12 +133,12 @@ public class ArimaKinenRepository
     /// </summary>
     private static void QueryWithSingleParameter(SqliteConnection connection)
     {
-        const string SELECT_SQL = @"SELECT * FROM arima_kinen WHERE umaban = @umaban;";
+        const string SelectSql = @"SELECT * FROM arima_kinen WHERE umaban = @umaban;";
 
         // 匿名パラメーター(Anonymous Parameter)の場合
         // new {[カラム名] = [値]} でパラメーターを作成します。
         var param1 = 3;
-        var apResult = connection.QueryFirstOrDefault<ArimaKinenDTO>(SELECT_SQL, new { umaban = param1 });
+        var apResult = connection.QueryFirstOrDefault<ArimaKinenDTO>(SelectSql, new { umaban = param1 });
 
         Console.WriteLine("\r\n馬番が3の馬を返します。");
         Console.WriteLine($"{apResult?.Wakuban} {apResult?.Umaban} {apResult?.Bamei} {apResult?.Seibetu}{apResult?.Barei} {apResult?.Kinryo} {apResult?.Kisyu} {apResult?.Kyusya} {apResult?.CreateDate} {apResult?.UpdateDate}");
@@ -150,7 +150,7 @@ public class ArimaKinenRepository
         var param2 = "4";
         parameters.Add("@umaban", param2, DbType.Int32); // 第3引数はパラメータの型を指定します。
 
-        var dpResult = connection.QueryFirstOrDefault<ArimaKinenDTO>(SELECT_SQL, parameters);
+        var dpResult = connection.QueryFirstOrDefault<ArimaKinenDTO>(SelectSql, parameters);
 
         Console.WriteLine("\r\n馬番が4の馬を返します。");
         Console.WriteLine($"{dpResult?.Wakuban} {dpResult?.Umaban} {dpResult?.Bamei} {dpResult?.Seibetu}{dpResult?.Barei} {dpResult?.Kinryo} {dpResult?.Kisyu} {dpResult?.Kyusya} {dpResult?.CreateDate} {dpResult?.UpdateDate}");
@@ -161,13 +161,13 @@ public class ArimaKinenRepository
     /// </summary>
     private static void QueryWithInClause(SqliteConnection connection)
     {
-        const string SELECT_SQL = @"SELECT * FROM arima_kinen WHERE umaban in @umaban;";
+        const string SelectSql = @"SELECT * FROM arima_kinen WHERE umaban in @umaban;";
 
         // in句に設定したい値で配列を作成します。new List<int> { 1, 5, 9 }; でもOK
         var numbers = new[] { 1, 5, 9 };
 
         // 匿名パラメーター(Anonymous Parameter)で配列のパラメータを作成します。
-        var targetRows = connection.Query<ArimaKinenDTO>(SELECT_SQL, new { umaban = numbers });
+        var targetRows = connection.Query<ArimaKinenDTO>(SelectSql, new { umaban = numbers });
 
         Console.WriteLine("\r\n馬番が1,5,9の馬を返します。");
 
@@ -183,14 +183,14 @@ public class ArimaKinenRepository
     private static void ExecuteScalarQueries(SqliteConnection connection)
     {
         // COUNT
-        const string COUNT_SQL = @"SELECT COUNT(*) FROM arima_kinen;";
-        var count = connection.ExecuteScalar(COUNT_SQL);
+        const string CountSql = @"SELECT COUNT(*) FROM arima_kinen;";
+        var count = connection.ExecuteScalar(CountSql);
 
         Console.WriteLine($"\r\n2022年の有馬記念は計{count}頭が出走しました。");
 
         // SUM
-        const string SUM_SQL = @"SELECT SUM(barei) FROM arima_kinen;";
-        var sum = connection.ExecuteScalar(SUM_SQL);
+        const string SumSql = @"SELECT SUM(barei) FROM arima_kinen;";
+        var sum = connection.ExecuteScalar(SumSql);
 
         Console.WriteLine($"\r\n2022年の有馬記念出走馬の馬齢合計は{sum}です。");
     }

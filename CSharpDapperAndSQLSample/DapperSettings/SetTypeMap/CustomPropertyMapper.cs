@@ -22,7 +22,7 @@ public class CustomPropertyMapper
                    var property = columnName switch
                    {
                        "kaisu" => type.GetProperty("Time"),             // 回数
-                       "wakuban" => type.GetProperty("BracketNumber"),  // 枠番
+                       "wakuban" => type.GetProperty("BracketNumber"),  // 枠番(ゲート番)
                        "umaban" => type.GetProperty("HorseNumber"),     // 馬番
                        "bamei" => type.GetProperty("HorseName"),        // 馬名
                        "seibetu" => type.GetProperty("Sex"),            // 性別

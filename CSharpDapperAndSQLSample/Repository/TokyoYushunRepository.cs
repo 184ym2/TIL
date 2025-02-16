@@ -27,6 +27,7 @@ public class TokyoYushunRepository
         connection.Open();
 
         GetAllTokyoYushunRecords(connection);
+        GetTokyoYushunRecordsWithError(connection);
         AddTokyoYushunRecords(connection);
         DeleteTokyoYushunRecords(connection);
     }
@@ -36,12 +37,46 @@ public class TokyoYushunRepository
     /// </summary>
     private static void GetAllTokyoYushunRecords(SqliteConnection connection)
     {
-        const string SELECT_SQL = @"SELECT * FROM tokyo_yushun WHERE kaisu = 88;";
+        const string SelectSql1 = @"SELECT * FROM tokyo_yushun WHERE kaisu = 88;";
 
-        var rows = connection.Query<TokyoYushunDTO>(SELECT_SQL);
+        var rows1 = connection.Query<TokyoYushunDTO>(SelectSql1);
 
         Console.WriteLine("\r\n複数行を取得し、全てのレコードを返します。");
-        foreach (var row in rows)
+        foreach (var row in rows1)
+        {
+            Console.WriteLine($"第{row.Kaisu}回 {row.Wakuban!.Value} {row.Umaban!.Value} {row.Bamei} {row.Seibetu}{row.Barei} {row.Kinryo} {row.Kisyu} {row.Kyusya} {row.CreateDate} {row.UpdateDate}");
+        }
+
+        // 以下のように、パラメーターにカスタムクラスを使用してデータを取得することもできます。
+        const string SelectSql2 = @"SELECT * FROM tokyo_yushun WHERE kyusya = @kyusya;";
+
+        var rows2 = connection.QueryFirstOrDefault<TokyoYushunDTO>(SelectSql1, new { umaban = Umaban.Parse(1) });
+        var rows3 = connection.QueryFirstOrDefault<TokyoYushunDTO>(SelectSql2, new { kyusya = Kyusya.Parse("鹿戸") });
+
+        Console.WriteLine($"第{rows2!.Kaisu}回 {rows2.Wakuban!.Value} {rows2.Umaban!.Value} {rows2.Bamei} {rows2.Seibetu}{rows2.Barei} {rows2.Kinryo} {rows2.Kisyu} {rows2.Kyusya} {rows2.CreateDate} {rows2.UpdateDate}");
+        Console.WriteLine($"第{rows3!.Kaisu}回 {rows3.Wakuban!.Value} {rows3.Umaban!.Value} {rows3.Bamei} {rows3.Seibetu}{rows3.Barei} {rows3.Kinryo} {rows3.Kisyu} {rows3.Kyusya} {rows3.CreateDate} {rows3.UpdateDate}");
+    }
+
+    /// <summary>
+    /// データの取得(失敗例)
+    /// </summary>
+    private static void GetTokyoYushunRecordsWithError(SqliteConnection connection)
+    {
+        const string SelectSql = @"SELECT * FROM tokyo_yushun WHERE umaban = @umaban;";
+        const string SelectMultipleSql = @"SELECT * FROM tokyo_yushun WHERE umaban in @umabanList;";
+
+        // パラメーター用のリストをUmabanクラスを使用して作成します。
+        var numbers = new List<Umaban> { Umaban.Parse(1), Umaban.Parse(2), Umaban.Parse(3) };
+
+        // rows1 と rows2は正常に取得できますが、rows3は取得できません。
+        var rows1 = connection.QueryFirstOrDefault<TokyoYushunDTO>(SelectSql, new { umaban = Umaban.Parse(1) });
+        var rows2 = connection.Query<TokyoYushunDTO>(SelectMultipleSql, new { umabanList = numbers.Select(x => x.Value) });
+
+        // var rows3 = connection.Query<TokyoYushunDTO>(SelectMultipleSql, new { umabanList = numbers });
+
+        Console.WriteLine($"第{rows1!.Kaisu}回 {rows1.Wakuban!.Value} {rows1.Umaban!.Value} {rows1.Bamei} {rows1.Seibetu}{rows1.Barei} {rows1.Kinryo} {rows1.Kisyu} {rows1.Kyusya} {rows1.CreateDate} {rows1.UpdateDate}");
+
+        foreach (var row in rows2)
         {
             Console.WriteLine($"第{row.Kaisu}回 {row.Wakuban!.Value} {row.Umaban!.Value} {row.Bamei} {row.Seibetu}{row.Barei} {row.Kinryo} {row.Kisyu} {row.Kyusya} {row.CreateDate} {row.UpdateDate}");
         }
@@ -52,7 +87,7 @@ public class TokyoYushunRepository
     /// </summary>
     private static void AddTokyoYushunRecords(SqliteConnection connection)
     {
-        const string INSERT_SQL = @"
+        const string InsertSql = @"
             INSERT INTO tokyo_yushun
             (
                 kaisu,
@@ -121,7 +156,7 @@ public class TokyoYushunRepository
             updatedate = DateTime.Now
         });
 
-        var insertResult = connection.Execute(INSERT_SQL, multiInsertParams);
+        var insertResult = connection.Execute(InsertSql, multiInsertParams);
         Console.WriteLine($"\r\n{insertResult}件追加しました。");
 
         /*
@@ -135,9 +170,9 @@ public class TokyoYushunRepository
     /// </summary>
     private static void DeleteTokyoYushunRecords(SqliteConnection connection)
     {
-        const string DELETE_SQL = @"DELETE FROM tokyo_yushun WHERE kaisu = 89;";
+        const string DeleteSql = @"DELETE FROM tokyo_yushun WHERE kaisu = 89;";
 
-        var deleteResult = connection.Execute(DELETE_SQL);
+        var deleteResult = connection.Execute(DeleteSql);
         Console.WriteLine($"\r\n{deleteResult}件削除しました。");
     }
 

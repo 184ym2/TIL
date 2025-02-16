@@ -3,7 +3,7 @@ namespace CSharpDapperAndSQLSample.Model;
 /// <summary>
 /// 枠番
 /// </summary>
-public record struct Wakuban
+public readonly record struct Wakuban
 {
     /// <summary>
     /// 馬番の値
@@ -18,7 +18,7 @@ public record struct Wakuban
     /// <summary>
     /// 枠番の色
     /// </summary>
-    public WakubanColor Color;
+    public readonly WakubanColor Color;
 
     /// <summary>
     /// コンストラクタ

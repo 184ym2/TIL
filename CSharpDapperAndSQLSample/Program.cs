@@ -9,10 +9,10 @@ class Program
     static void Main(string[] args)
     {
         // 取得、集計の例
-        //ArimaKinenRepository.Execute();
+        ArimaKinenRepository.Execute();
         
         // 追加、更新、削除の例
-        //TakarazukaKinenRepository.Execute();
+        TakarazukaKinenRepository.Execute();
 
         // 型ハンドラーの設定
         TypeHandlerSettings.ConfigureDapperTypeHandlers();
