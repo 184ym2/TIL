@@ -77,8 +77,8 @@ public class ArimaKinenRepository
     /// </summary>
     private static void QueryFirstRow(SqliteConnection connection)
     {
-        const string SELECT_SQL = @"SELECT * FROM arima_kinen;";
-        var firstRow = connection.QueryFirstOrDefault<ArimaKinenDTO>(SELECT_SQL);
+        const string SelectSql = @"SELECT * FROM arima_kinen;";
+        var firstRow = connection.QueryFirstOrDefault<ArimaKinenDTO>(SelectSql);
 
         Console.WriteLine("\r\n複数行を取得し、1行目のレコードを返します。");
 
@@ -98,14 +98,14 @@ public class ArimaKinenRepository
     /// </summary>
     private static void QueryMultipleSelects(SqliteConnection connection)
     {
-        const string SELECT_SQL = @"
+        const string SelectSql = @"
             SELECT * FROM arima_kinen;
             SELECT * FROM arima_kinen WHERE umaban = 13;
             SELECT COUNT(*) FROM arima_kinen;
             ";
 
         // SELECT文をまとめて実行します。
-        var multi = connection.QueryMultiple(SELECT_SQL);
+        var multi = connection.QueryMultiple(SelectSql);
 
         // 戻り値の型を指定して1番目のSELECT文の取得結果を受け取ります。
         var allRows = multi.Read<ArimaKinenDTO>();

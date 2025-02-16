@@ -186,7 +186,7 @@ public class TakarazukaKinenRepository
 
             foreach (var item in addList)
             {
-                var multiInsertResult = connection.Execute(insertSql, new
+                var multiInsertResult = connection.Execute(InsertSql, new
                 {
                     wakuban = x.Wakuban,
                     bamei = x.Bamei,
